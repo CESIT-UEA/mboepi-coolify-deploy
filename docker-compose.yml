@@ -3,14 +3,14 @@ services:
     image: postgres:16
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: moodle
+      POSTGRES_USER: moodleuser
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       TZ: America/Manaus
     volumes:
-      - ${POSTGRES_DATA_HOST_PATH}:/var/lib/postgresql/data
+      - /data/mboepi/postgres-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      test: ["CMD-SHELL", "pg_isready -U moodleuser -d moodle"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -24,13 +24,13 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      MOODLE_DOMAIN: ${MOODLE_DOMAIN}
-      MOODLE_URL: ${MOODLE_URL}
+      MOODLE_DOMAIN: mboepi.tecnocomp.cloud
+      MOODLE_URL: https://mboepi.tecnocomp.cloud
 
       MOODLE_DBTYPE: pgsql
       MOODLE_DBHOST: postgres
-      MOODLE_DBNAME: ${POSTGRES_DB}
-      MOODLE_DBUSER: ${POSTGRES_USER}
+      MOODLE_DBNAME: moodle
+      MOODLE_DBUSER: moodleuser
       MOODLE_DBPASS: ${POSTGRES_PASSWORD}
       MOODLE_DBPORT: 5432
 
@@ -44,7 +44,7 @@ services:
 
       TZ: America/Manaus
     volumes:
-      - ${MOODLE_DATA_HOST_PATH}:/var/www/moodledata
+      - /data/mboepi/moodledata:/var/www/moodledata
     expose:
       - "80"
     healthcheck:
@@ -65,12 +65,12 @@ services:
       moodle:
         condition: service_started
     environment:
-      MOODLE_URL: ${MOODLE_URL}
+      MOODLE_URL: https://mboepi.tecnocomp.cloud
 
       MOODLE_DBTYPE: pgsql
       MOODLE_DBHOST: postgres
-      MOODLE_DBNAME: ${POSTGRES_DB}
-      MOODLE_DBUSER: ${POSTGRES_USER}
+      MOODLE_DBNAME: moodle
+      MOODLE_DBUSER: moodleuser
       MOODLE_DBPASS: ${POSTGRES_PASSWORD}
       MOODLE_DBPORT: 5432
 
@@ -80,5 +80,5 @@ services:
 
       TZ: America/Manaus
     volumes:
-      - ${MOODLE_DATA_HOST_PATH}:/var/www/moodledata
+      - /data/mboepi/moodledata:/var/www/moodledata
     command: ["/usr/local/bin/moodle-cron.sh"]
