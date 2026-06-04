@@ -79,7 +79,7 @@ services:
       - moodledata:/var/www/moodledata
     command: >
       sh -c "while true; do
-      php /var/www/moodle/public/admin/cli/cron.php;
+      php /var/www/moodle/admin/cli/cron.php;
       sleep 60;
       done"
 
