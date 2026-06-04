@@ -3,14 +3,14 @@ services:
     image: postgres:16
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-moodle}
-      POSTGRES_USER: ${POSTGRES_USER:-moodleuser}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD no Coolify}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       TZ: America/Manaus
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ${POSTGRES_DATA_HOST_PATH}:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-moodleuser} -d ${POSTGRES_DB:-moodle}"]
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -24,42 +24,35 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      MOODLE_URL: ${MOODLE_URL:?Defina MOODLE_URL no Coolify}
+      MOODLE_DOMAIN: ${MOODLE_DOMAIN}
+      MOODLE_URL: ${MOODLE_URL}
+
       MOODLE_DBTYPE: pgsql
       MOODLE_DBHOST: postgres
-      MOODLE_DBNAME: ${POSTGRES_DB:-moodle}
-      MOODLE_DBUSER: ${POSTGRES_USER:-moodleuser}
-      MOODLE_DBPASS: ${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD no Coolify}
+      MOODLE_DBNAME: ${POSTGRES_DB}
+      MOODLE_DBUSER: ${POSTGRES_USER}
+      MOODLE_DBPASS: ${POSTGRES_PASSWORD}
       MOODLE_DBPORT: 5432
+
       MOODLE_DATAROOT: /var/www/moodledata
-      MOODLE_AUTO_INSTALL: ${MOODLE_AUTO_INSTALL:-true}
-      MOODLE_FULLNAME: ${MOODLE_FULLNAME:-Mboepi}
-      MOODLE_SHORTNAME: ${MOODLE_SHORTNAME:-Mboepi}
-      MOODLE_ADMIN_USER: ${MOODLE_ADMIN_USER:-admin}
-      MOODLE_ADMIN_PASSWORD: ${MOODLE_ADMIN_PASSWORD:?Defina MOODLE_ADMIN_PASSWORD no Coolify}
-      MOODLE_ADMIN_EMAIL: ${MOODLE_ADMIN_EMAIL:?Defina MOODLE_ADMIN_EMAIL no Coolify}
+      MOODLE_AUTO_INSTALL: ${MOODLE_AUTO_INSTALL}
+      MOODLE_FULLNAME: ${MOODLE_FULLNAME}
+      MOODLE_SHORTNAME: ${MOODLE_SHORTNAME}
+      MOODLE_ADMIN_USER: ${MOODLE_ADMIN_USER}
+      MOODLE_ADMIN_PASSWORD: ${MOODLE_ADMIN_PASSWORD}
+      MOODLE_ADMIN_EMAIL: ${MOODLE_ADMIN_EMAIL}
+
       TZ: America/Manaus
     volumes:
-      - ${MOODLE_DATA_HOST_PATH:-/data/mboepi/moodledata}:/var/www/moodledata
+      - ${MOODLE_DATA_HOST_PATH}:/var/www/moodledata
     expose:
       - "80"
     healthcheck:
-      test: ["CMD-SHELL", "curl -fsS http://localhost/ >/dev/null || exit 1"]
+      test: ["CMD-SHELL", "curl -fsS -L http://localhost/ >/dev/null || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 10
-      start_period: 180s
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.mboepi-http.rule=Host(`mboepi.tecnocomp.cloud`)"
-      - "traefik.http.routers.mboepi-http.entrypoints=http"
-      - "traefik.http.routers.mboepi-http.middlewares=mboepi-redirect-https"
-      - "traefik.http.middlewares.mboepi-redirect-https.redirectscheme.scheme=https"
-      - "traefik.http.routers.mboepi-https.rule=Host(`mboepi.tecnocomp.cloud`)"
-      - "traefik.http.routers.mboepi-https.entrypoints=https"
-      - "traefik.http.routers.mboepi-https.tls=true"
-      - "traefik.http.routers.mboepi-https.tls.certresolver=letsencrypt"
-      - "traefik.http.services.mboepi.loadbalancer.server.port=80"
+      start_period: 240s
 
   cron:
     build:
@@ -72,19 +65,20 @@ services:
       moodle:
         condition: service_started
     environment:
-      MOODLE_URL: ${MOODLE_URL:?Defina MOODLE_URL no Coolify}
+      MOODLE_URL: ${MOODLE_URL}
+
       MOODLE_DBTYPE: pgsql
       MOODLE_DBHOST: postgres
-      MOODLE_DBNAME: ${POSTGRES_DB:-moodle}
-      MOODLE_DBUSER: ${POSTGRES_USER:-moodleuser}
-      MOODLE_DBPASS: ${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD no Coolify}
+      MOODLE_DBNAME: ${POSTGRES_DB}
+      MOODLE_DBUSER: ${POSTGRES_USER}
+      MOODLE_DBPASS: ${POSTGRES_PASSWORD}
       MOODLE_DBPORT: 5432
+
       MOODLE_DATAROOT: /var/www/moodledata
       MOODLE_AUTO_INSTALL: "false"
+      MOODLE_CRON_INTERVAL: ${MOODLE_CRON_INTERVAL}
+
       TZ: America/Manaus
     volumes:
-      - ${MOODLE_DATA_HOST_PATH:-/data/mboepi/moodledata}:/var/www/moodledata
+      - ${MOODLE_DATA_HOST_PATH}:/var/www/moodledata
     command: ["/usr/local/bin/moodle-cron.sh"]
-
-volumes:
-  postgres_data:

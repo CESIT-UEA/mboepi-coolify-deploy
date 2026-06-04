@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     nginx \
     supervisor \
     postgresql-client \
+    gosu \
     libzip-dev \
     libicu-dev \
     libxml2-dev \

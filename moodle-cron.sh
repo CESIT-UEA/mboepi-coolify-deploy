@@ -5,12 +5,33 @@ MOODLE_DIR="${MOODLE_DIR:-/var/www/moodle}"
 MOODLE_DATAROOT="${MOODLE_DATAROOT:-/var/www/moodledata}"
 CRON_INTERVAL="${MOODLE_CRON_INTERVAL:-300}"
 
+umask 0007
+
 log() {
   printf '%s\n' "$*"
 }
 
+run_as_www_data() {
+  gosu www-data "$@"
+}
+
+fix_moodledata_permissions() {
+  mkdir -p "$MOODLE_DATAROOT" \
+           "$MOODLE_DATAROOT/cache" \
+           "$MOODLE_DATAROOT/localcache" \
+           "$MOODLE_DATAROOT/temp" \
+           "$MOODLE_DATAROOT/sessions" \
+           "$MOODLE_DATAROOT/muc" \
+           "$MOODLE_DATAROOT/filedir" \
+           "$MOODLE_DATAROOT/lang"
+
+  chown -R www-data:www-data "$MOODLE_DATAROOT"
+  find "$MOODLE_DATAROOT" -type d -exec chmod 770 {} \;
+  find "$MOODLE_DATAROOT" -type f -exec chmod 660 {} \;
+}
+
 database_is_installed() {
-  php <<'PHP'
+  run_as_www_data php <<'PHP'
 <?php
 try {
     $host = getenv('MOODLE_DBHOST') ?: 'postgres';
@@ -30,6 +51,8 @@ try {
 PHP
 }
 
+fix_moodledata_permissions
+
 log "Aguardando instalação do banco do Moodle..."
 
 attempts=0
@@ -42,11 +65,12 @@ until database_is_installed; do
   sleep 10
 done
 
-log "Banco do Moodle instalado. Iniciando cron."
+log "Banco do Moodle instalado. Iniciando cron como www-data."
 
 while true; do
   if [ -f "$MOODLE_DIR/admin/cli/cron.php" ]; then
-    php "$MOODLE_DIR/admin/cli/cron.php" -f || true
+    run_as_www_data php "$MOODLE_DIR/admin/cli/cron.php" -f || true
+    fix_moodledata_permissions
   else
     log "ERRO: cron.php não encontrado em $MOODLE_DIR/admin/cli/cron.php"
     find "$MOODLE_DIR" -path "*/admin/cli/cron.php" || true
