@@ -37,6 +37,23 @@ services:
       - moodledata:/var/www/moodledata
     expose:
       - "80"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mboepi-http.rule=Host(`mboepi.tecnocomp.cloud`)"
+      - "traefik.http.routers.mboepi-http.entrypoints=http"
+      - "traefik.http.routers.mboepi-http.middlewares=mboepi-redirect-https"
+      - "traefik.http.middlewares.mboepi-redirect-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.mboepi-https.rule=Host(`mboepi.tecnocomp.cloud`)"
+      - "traefik.http.routers.mboepi-https.entrypoints=https"
+      - "traefik.http.routers.mboepi-https.tls=true"
+      - "traefik.http.routers.mboepi-https.tls.certresolver=letsencrypt"
+      - "traefik.http.services.mboepi.loadbalancer.server.port=80"
 
   cron:
     build:
