@@ -189,7 +189,6 @@ install_database_if_needed() {
 
   run_as_www_data php "$MOODLE_DIR/admin/cli/install_database.php" \
     --agree-license \
-    --non-interactive \
     --fullname="${MOODLE_FULLNAME:-Mboepi}" \
     --shortname="${MOODLE_SHORTNAME:-Mboepi}" \
     --adminuser="${MOODLE_ADMIN_USER:-admin}" \
