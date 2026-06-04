@@ -1,0 +1,71 @@
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-moodle}
+      POSTGRES_USER: ${POSTGRES_USER:-moodleuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD no Coolify}
+      TZ: America/Manaus
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-moodleuser} -d ${POSTGRES_DB:-moodle}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  moodle:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      MOODLE_URL: ${MOODLE_URL:?Defina MOODLE_URL no Coolify}
+      MOODLE_DBTYPE: pgsql
+      MOODLE_DBHOST: postgres
+      MOODLE_DBNAME: ${POSTGRES_DB:-moodle}
+      MOODLE_DBUSER: ${POSTGRES_USER:-moodleuser}
+      MOODLE_DBPASS: ${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD no Coolify}
+      MOODLE_DBPORT: 5432
+      MOODLE_DATAROOT: /var/www/moodledata
+      TZ: America/Manaus
+    volumes:
+      - moodledata:/var/www/moodledata
+    ports:
+      - "80"
+
+  cron:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      moodle:
+        condition: service_started
+    environment:
+      MOODLE_URL: ${MOODLE_URL:?Defina MOODLE_URL no Coolify}
+      MOODLE_DBTYPE: pgsql
+      MOODLE_DBHOST: postgres
+      MOODLE_DBNAME: ${POSTGRES_DB:-moodle}
+      MOODLE_DBUSER: ${POSTGRES_USER:-moodleuser}
+      MOODLE_DBPASS: ${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD no Coolify}
+      MOODLE_DBPORT: 5432
+      MOODLE_DATAROOT: /var/www/moodledata
+      TZ: America/Manaus
+    volumes:
+      - moodledata:/var/www/moodledata
+    command: >
+      sh -c "while true; do
+      php /var/www/moodle/public/admin/cli/cron.php;
+      sleep 60;
+      done"
+
+volumes:
+  postgres_data:
+  moodledata:
