@@ -35,7 +35,7 @@ services:
       TZ: America/Manaus
     volumes:
       - moodledata:/var/www/moodledata
-    ports:
+    expose:
       - "80"
 
   cron:
