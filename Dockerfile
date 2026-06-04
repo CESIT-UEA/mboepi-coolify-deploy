@@ -2,12 +2,15 @@ FROM php:8.3-fpm-bookworm
 
 ENV MOODLE_VERSION=MOODLE_502_STABLE
 ENV MOODLE_DIR=/var/www/moodle
+ENV MOODLE_DATAROOT=/var/www/moodledata
 
 RUN apt-get update && apt-get install -y \
     git \
     unzip \
+    curl \
     nginx \
     supervisor \
+    postgresql-client \
     libzip-dev \
     libicu-dev \
     libxml2-dev \
@@ -43,10 +46,11 @@ COPY php/php.ini /usr/local/etc/php/conf.d/custom.ini
 COPY nginx/default.conf /etc/nginx/sites-available/default
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY moodle-cron.sh /usr/local/bin/moodle-cron.sh
 
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
-    && mkdir -p /run/nginx \
-    && chown -R www-data:www-data ${MOODLE_DIR}
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh /usr/local/bin/moodle-cron.sh \
+    && mkdir -p /run/nginx ${MOODLE_DATAROOT} \
+    && chown -R www-data:www-data ${MOODLE_DIR} ${MOODLE_DATAROOT}
 
 WORKDIR ${MOODLE_DIR}
 

@@ -32,17 +32,23 @@ services:
       MOODLE_DBPASS: ${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD no Coolify}
       MOODLE_DBPORT: 5432
       MOODLE_DATAROOT: /var/www/moodledata
+      MOODLE_AUTO_INSTALL: ${MOODLE_AUTO_INSTALL:-true}
+      MOODLE_FULLNAME: ${MOODLE_FULLNAME:-Mboepi}
+      MOODLE_SHORTNAME: ${MOODLE_SHORTNAME:-Mboepi}
+      MOODLE_ADMIN_USER: ${MOODLE_ADMIN_USER:-admin}
+      MOODLE_ADMIN_PASSWORD: ${MOODLE_ADMIN_PASSWORD:?Defina MOODLE_ADMIN_PASSWORD no Coolify}
+      MOODLE_ADMIN_EMAIL: ${MOODLE_ADMIN_EMAIL:?Defina MOODLE_ADMIN_EMAIL no Coolify}
       TZ: America/Manaus
     volumes:
-      - moodledata:/var/www/moodledata
+      - ${MOODLE_DATA_HOST_PATH:-/data/mboepi/moodledata}:/var/www/moodledata
     expose:
       - "80"
     healthcheck:
-      test: ["CMD-SHELL", "curl -fsS http://localhost/ || exit 1"]
+      test: ["CMD-SHELL", "curl -fsS http://localhost/ >/dev/null || exit 1"]
       interval: 30s
       timeout: 10s
-      retries: 5
-      start_period: 60s
+      retries: 10
+      start_period: 180s
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.mboepi-http.rule=Host(`mboepi.tecnocomp.cloud`)"
@@ -74,15 +80,11 @@ services:
       MOODLE_DBPASS: ${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD no Coolify}
       MOODLE_DBPORT: 5432
       MOODLE_DATAROOT: /var/www/moodledata
+      MOODLE_AUTO_INSTALL: "false"
       TZ: America/Manaus
     volumes:
-      - moodledata:/var/www/moodledata
-    command: >
-      sh -c "while true; do
-      php /var/www/moodle/admin/cli/cron.php;
-      sleep 60;
-      done"
+      - ${MOODLE_DATA_HOST_PATH:-/data/mboepi/moodledata}:/var/www/moodledata
+    command: ["/usr/local/bin/moodle-cron.sh"]
 
 volumes:
   postgres_data:
-  moodledata:
