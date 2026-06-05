@@ -90,7 +90,6 @@ $CFG->admin     = 'admin';
 
 // Necessário quando o HTTPS termina no Traefik/Coolify e o Nginx interno recebe HTTP.
 $CFG->sslproxy = true;
-$CFG->reverseproxy = true;
 
 $CFG->directorypermissions = 0770;
 
