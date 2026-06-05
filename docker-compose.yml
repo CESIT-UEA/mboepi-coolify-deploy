@@ -48,7 +48,7 @@ services:
     expose:
       - "80"
     healthcheck:
-      test: ["CMD-SHELL", "curl -fsS -L http://localhost/ >/dev/null || exit 1"]
+      test: ["CMD-SHELL", "curl -fsS http://localhost/login/index.php > /dev/null || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 10
