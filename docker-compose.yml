@@ -45,6 +45,7 @@ services:
       TZ: America/Manaus
     volumes:
       - /data/mboepi/moodledata:/var/www/moodledata
+      - /data/mboepi/moodle:/var/www/moodle
     expose:
       - "80"
     healthcheck:
