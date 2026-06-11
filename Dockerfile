@@ -6,18 +6,33 @@ ENV MOODLE_DATAROOT=/var/www/moodledata
 ARG IAJUDGE_REPO=https://github.com/jlfilho/mod_iajudge.git
 ARG IAJUDGE_REF=main
 
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
 RUN set -eux; \
     export DEBIAN_FRONTEND=noninteractive; \
-    apt-get update -o Acquire::Retries=5; \
-    apt-get install -y --no-install-recommends \
+    apt-get update -o Acquire::Retries=5
+
+RUN set -eux; \
+    export DEBIAN_FRONTEND=noninteractive; \
+    for pkg in \
         git \
         unzip \
         curl \
-        composer \
         nginx \
         supervisor \
         postgresql-client \
         gosu \
+        graphviz \
+        aspell \
+        ghostscript \
+    ; do \
+        echo "Installing runtime package: $pkg"; \
+        apt-get install -y --no-install-recommends "$pkg"; \
+    done
+
+RUN set -eux; \
+    export DEBIAN_FRONTEND=noninteractive; \
+    for pkg in \
         libzip-dev \
         libicu-dev \
         libxml2-dev \
@@ -29,10 +44,12 @@ RUN set -eux; \
         libonig-dev \
         libsodium-dev \
         libxslt1-dev \
-        graphviz \
-        aspell \
-        ghostscript \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    ; do \
+        echo "Installing build dependency: $pkg"; \
+        apt-get install -y --no-install-recommends "$pkg"; \
+    done
+
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install \
         pgsql \
         pdo_pgsql \
