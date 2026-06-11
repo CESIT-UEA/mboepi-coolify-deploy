@@ -3,6 +3,8 @@ FROM php:8.3-fpm-bookworm
 ENV MOODLE_VERSION=MOODLE_502_STABLE
 ENV MOODLE_DIR=/var/www/moodle
 ENV MOODLE_DATAROOT=/var/www/moodledata
+ARG IAJUDGE_REPO=https://github.com/jlfilho/mod_iajudge.git
+ARG IAJUDGE_REF=main
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -45,6 +47,11 @@ RUN apt-get update && apt-get install -y \
 RUN git clone --depth 1 --branch ${MOODLE_VERSION} https://github.com/moodle/moodle.git ${MOODLE_DIR}
 RUN cd ${MOODLE_DIR} \
     && composer install --no-dev --classmap-authoritative --no-interaction --no-progress --prefer-dist
+
+RUN git clone --depth 1 --branch ${IAJUDGE_REF} ${IAJUDGE_REPO} /tmp/mod_iajudge \
+    && mkdir -p ${MOODLE_DIR}/mod/iajudge \
+    && cp -R /tmp/mod_iajudge/. ${MOODLE_DIR}/mod/iajudge/ \
+    && rm -rf /tmp/mod_iajudge
 
 COPY php/php.ini /usr/local/etc/php/conf.d/custom.ini
 COPY nginx/default.conf /etc/nginx/sites-available/default
