@@ -6,29 +6,32 @@ ENV MOODLE_DATAROOT=/var/www/moodledata
 ARG IAJUDGE_REPO=https://github.com/jlfilho/mod_iajudge.git
 ARG IAJUDGE_REF=main
 
-RUN apt-get update && apt-get install -y \
-    git \
-    unzip \
-    curl \
-    composer \
-    nginx \
-    supervisor \
-    postgresql-client \
-    gosu \
-    libzip-dev \
-    libicu-dev \
-    libxml2-dev \
-    libpq-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libcurl4-openssl-dev \
-    libonig-dev \
-    libsodium-dev \
-    libxslt1-dev \
-    graphviz \
-    aspell \
-    ghostscript \
+RUN set -eux; \
+    export DEBIAN_FRONTEND=noninteractive; \
+    apt-get update -o Acquire::Retries=5; \
+    apt-get install -y --no-install-recommends \
+        git \
+        unzip \
+        curl \
+        composer \
+        nginx \
+        supervisor \
+        postgresql-client \
+        gosu \
+        libzip-dev \
+        libicu-dev \
+        libxml2-dev \
+        libpq-dev \
+        libpng-dev \
+        libjpeg-dev \
+        libfreetype6-dev \
+        libcurl4-openssl-dev \
+        libonig-dev \
+        libsodium-dev \
+        libxslt1-dev \
+        graphviz \
+        aspell \
+        ghostscript \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install \
         pgsql \
