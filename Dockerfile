@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     git \
     unzip \
     curl \
+    composer \
     nginx \
     supervisor \
     postgresql-client \
@@ -42,6 +43,8 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 RUN git clone --depth 1 --branch ${MOODLE_VERSION} https://github.com/moodle/moodle.git ${MOODLE_DIR}
+RUN cd ${MOODLE_DIR} \
+    && composer install --no-dev --classmap-authoritative --no-interaction --no-progress --prefer-dist
 
 COPY php/php.ini /usr/local/etc/php/conf.d/custom.ini
 COPY nginx/default.conf /etc/nginx/sites-available/default

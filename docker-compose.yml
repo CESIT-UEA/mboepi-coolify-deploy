@@ -47,6 +47,12 @@ services:
       - /data/mboepi/moodledata:/var/www/moodledata
     expose:
       - "80"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.moodle.rule=Host(`mboepi.tecnocomp.cloud`)
+      - traefik.http.routers.moodle.entrypoints=websecure
+      - traefik.http.routers.moodle.tls=true
+      - traefik.http.services.moodle.loadbalancer.server.port=80
     healthcheck:
       test: ["CMD-SHELL", "curl -fsS http://localhost/login/index.php > /dev/null || exit 1"]
       interval: 30s
