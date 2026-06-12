@@ -1,0 +1,42 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local PHP/Moodle runtime artifacts
+config.php
+moodledata/
+data/
+cache/
+localcache/
+sessions/
+temp/
+muc/
+filedir/
+
+# Composer / PHP
+vendor/
+composer.phar
+.phpunit.result.cache
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Docker
+.docker/
+
+# Temporary files
+tmp/
