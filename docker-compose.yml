@@ -44,6 +44,9 @@ services:
       MOODLE_ADMIN_EMAIL: ${MOODLE_ADMIN_EMAIL}
 
       TZ: America/Manaus
+      LANG: pt_BR.UTF-8
+      LANGUAGE: pt_BR:pt:en
+      LC_ALL: pt_BR.UTF-8
     volumes:
       - /data/mboepi/moodledata:/var/www/moodledata
     expose:
@@ -87,6 +90,9 @@ services:
       MOODLE_CRON_INTERVAL: ${MOODLE_CRON_INTERVAL}
 
       TZ: America/Manaus
+      LANG: pt_BR.UTF-8
+      LANGUAGE: pt_BR:pt:en
+      LC_ALL: pt_BR.UTF-8
     volumes:
       - /data/mboepi/moodledata:/var/www/moodledata
     command: ["/usr/local/bin/moodle-cron.sh"]

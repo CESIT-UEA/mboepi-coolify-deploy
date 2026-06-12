@@ -3,6 +3,9 @@ FROM php:8.3-fpm-bookworm
 ENV MOODLE_VERSION=MOODLE_502_STABLE
 ENV MOODLE_DIR=/var/www/moodle
 ENV MOODLE_DATAROOT=/var/www/moodledata
+ENV LANG=pt_BR.UTF-8
+ENV LANGUAGE=pt_BR:pt:en
+ENV LC_ALL=pt_BR.UTF-8
 ARG IAJUDGE_REPO=https://github.com/jlfilho/mod_iajudge.git
 ARG IAJUDGE_REF=main
 
@@ -25,10 +28,17 @@ RUN set -eux; \
         graphviz \
         aspell \
         ghostscript \
+        locales \
     ; do \
         echo "Installing runtime package: $pkg"; \
         apt-get install -y --no-install-recommends "$pkg"; \
     done
+
+RUN set -eux; \
+    sed -i '/pt_BR.UTF-8/s/^# //g' /etc/locale.gen; \
+    sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen; \
+    sed -i '/en_AU.UTF-8/s/^# //g' /etc/locale.gen; \
+    locale-gen
 
 RUN set -eux; \
     export DEBIAN_FRONTEND=noninteractive; \
