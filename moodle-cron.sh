@@ -38,7 +38,7 @@ try {
     $port = getenv('MOODLE_DBPORT') ?: '5432';
     $db   = getenv('MOODLE_DBNAME') ?: 'moodle';
     $user = getenv('MOODLE_DBUSER') ?: 'moodleuser';
-    $pass = getenv('MOODLE_DBPASS') ?: '';
+    $pass = getenv('MOODLE_DBPASS') ?: getenv('POSTGRES_PASSWORD') ?: '';
     $pdo = new PDO("pgsql:host={$host};port={$port};dbname={$db}", $user, $pass, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     ]);
