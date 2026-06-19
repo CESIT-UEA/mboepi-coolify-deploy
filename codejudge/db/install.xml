@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="question/type/codejudge/db" VERSION="2026061300" COMMENT="XMLDB file for qtype_codejudge"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="qtype_codejudge_grading" COMMENT="Stores asynchronous AI grading requests and results">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Primary key"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="FK to question.id"/>
+        <FIELD NAME="questionattemptid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Question attempt id from the quiz engine"/>
+        <FIELD NAME="questionattemptstepid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="Question attempt step id when available"/>
+        <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="FK to user.id"/>
+        <FIELD NAME="language" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="python" SEQUENCE="false" COMMENT="Language used in the submission"/>
+        <FIELD NAME="code" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Submitted code"/>
+        <FIELD NAME="rubric" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Rubric text used to build the prompt"/>
+        <FIELD NAME="prompt" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Prompt sent to the AI provider"/>
+        <FIELD NAME="status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="queued" SEQUENCE="false" COMMENT="queued|processing|graded|error"/>
+        <FIELD NAME="score" TYPE="number" LENGTH="5" DECIMALS="2" NOTNULL="false" SEQUENCE="false" COMMENT="AI score 0-100"/>
+        <FIELD NAME="feedback" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="AI feedback text"/>
+        <FIELD NAME="rawresponse" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Raw AI response payload"/>
+        <FIELD NAME="errormessage" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Error message captured when grading fails"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Unix timestamp"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Unix timestamp"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="fk_questionid" TYPE="foreign" FIELDS="questionid" REFTABLE="question" REFFIELDS="id"/>
+        <KEY NAME="fk_userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="idx_questionid" UNIQUE="false" FIELDS="questionid"/>
+        <INDEX NAME="idx_questionattemptid" UNIQUE="false" FIELDS="questionattemptid"/>
+        <INDEX NAME="idx_status" UNIQUE="false" FIELDS="status"/>
+      </INDEXES>
+    </TABLE>
+
+    <TABLE NAME="qtype_codejudge_options" COMMENT="Options for code judge questions">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" COMMENT="Primary key"/>
+        <FIELD NAME="questionid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="FK to question.id"/>
+        <FIELD NAME="language" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="python" SEQUENCE="false" COMMENT="Allowed programming language"/>
+        <FIELD NAME="rubric" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Rubric/instructions for AI evaluation"/>
+        <FIELD NAME="startercode" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Starter code shown to students"/>
+        <FIELD NAME="editorheight" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="420" SEQUENCE="false" COMMENT="Editor height in pixels"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Unix timestamp"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Unix timestamp"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+        <KEY NAME="fk_questionid" TYPE="foreign" FIELDS="questionid" REFTABLE="question" REFFIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="uq_questionid" UNIQUE="true" FIELDS="questionid"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>

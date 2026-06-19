@@ -102,8 +102,17 @@ $CFG->wwwroot   = getenv('MOODLE_URL') ?: 'http://localhost';
 $CFG->dataroot  = getenv('MOODLE_DATAROOT') ?: '/var/www/moodledata';
 $CFG->admin     = 'admin';
 
-// Required when HTTPS terminates at Traefik/Coolify and internal Nginx sees HTTP.
-$CFG->sslproxy = true;
+$sslproxy = getenv('MOODLE_SSLPROXY');
+if ($sslproxy === false || $sslproxy === '') {
+  $CFG->sslproxy = stripos($CFG->wwwroot, 'https://') === 0;
+} else {
+  $CFG->sslproxy = in_array(strtolower($sslproxy), ['1', 'true', 'yes', 'on'], true);
+}
+
+$reverseproxy = getenv('MOODLE_REVERSEPROXY');
+if ($reverseproxy !== false && $reverseproxy !== '') {
+  $CFG->reverseproxy = in_array(strtolower($reverseproxy), ['1', 'true', 'yes', 'on'], true);
+}
 
 $CFG->directorypermissions = 0770;
 

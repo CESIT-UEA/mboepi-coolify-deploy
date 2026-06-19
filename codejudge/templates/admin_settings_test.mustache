@@ -1,0 +1,23 @@
+{{!
+    Admin settings widget for testing the configured AI provider.
+
+    @package     qtype_codejudge
+    @copyright   2026 IA Judge Contributors
+    @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+}}
+<div class="d-flex flex-wrap align-items-center ia-judge-settings-test-widget" data-region="ia-judge-settings-test">
+    <button
+        type="button"
+        id="ia-judge-test-connection-btn"
+        class="btn btn-secondary mt-2"
+        data-default-label="{{testconnectionlabel}}"
+        data-loading-label="{{testconnectionloadinglabel}}"
+    >
+        <span class="spinner-border spinner-border-sm mr-2 d-none" role="status" aria-hidden="true"></span>
+        <span class="ia-judge-test-button-label">{{testconnectionlabel}}</span>
+    </button>
+    <span id="ia-judge-test-result" class="ml-3 text-muted" aria-live="polite">
+        <span class="spinner-border spinner-border-sm text-primary mr-2 d-none" role="status" aria-hidden="true"></span>
+        <span class="ia-judge-test-result-message"></span>
+    </span>
+</div>

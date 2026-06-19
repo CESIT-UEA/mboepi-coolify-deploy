@@ -27,6 +27,8 @@ services:
     environment:
       MOODLE_DOMAIN: mboepi.tecnocomp.cloud
       MOODLE_URL: https://mboepi.tecnocomp.cloud
+      MOODLE_SSLPROXY: "true"
+      MOODLE_REVERSEPROXY: "true"
 
       MOODLE_DBTYPE: pgsql
       MOODLE_DBHOST: postgres
@@ -43,6 +45,7 @@ services:
       MOODLE_ADMIN_USER: ${MOODLE_ADMIN_USER}
       MOODLE_ADMIN_PASSWORD: ${MOODLE_ADMIN_PASSWORD}
       MOODLE_ADMIN_EMAIL: ${MOODLE_ADMIN_EMAIL}
+      MOODLE_CRON_INTERVAL: ${MOODLE_CRON_INTERVAL}
 
       TZ: America/Manaus
       LANG: pt_BR.UTF-8
@@ -64,34 +67,3 @@ services:
       timeout: 10s
       retries: 10
       start_period: 240s
-
-  cron:
-    image: mboepi-moodle:latest
-    restart: unless-stopped
-    depends_on:
-      postgres:
-        condition: service_healthy
-      moodle:
-        condition: service_started
-    environment:
-      MOODLE_URL: https://mboepi.tecnocomp.cloud
-
-      MOODLE_DBTYPE: pgsql
-      MOODLE_DBHOST: postgres
-      MOODLE_DBNAME: moodle
-      MOODLE_DBUSER: moodleuser
-      MOODLE_DBPASS: ${POSTGRES_PASSWORD}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      MOODLE_DBPORT: 5432
-
-      MOODLE_DATAROOT: /var/www/moodledata
-      MOODLE_AUTO_INSTALL: "false"
-      MOODLE_CRON_INTERVAL: ${MOODLE_CRON_INTERVAL}
-
-      TZ: America/Manaus
-      LANG: pt_BR.UTF-8
-      LANGUAGE: pt_BR:pt:en
-      LC_ALL: pt_BR.UTF-8
-    volumes:
-      - /data/mboepi/moodledata:/var/www/moodledata
-    command: ["/usr/local/bin/moodle-cron.sh"]

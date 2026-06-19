@@ -1,0 +1,15 @@
+services:
+  postgres:
+    volumes:
+      - "C:/mboepi/postgres-data:/var/lib/postgresql/data"
+
+  moodle:
+    ports:
+      - "8080:80"
+    environment:
+      MOODLE_DOMAIN: localhost
+      MOODLE_URL: http://localhost:8080
+      MOODLE_SSLPROXY: "false"
+      MOODLE_REVERSEPROXY: "true"
+    volumes:
+      - "C:/mboepi/moodledata:/var/www/moodledata"
