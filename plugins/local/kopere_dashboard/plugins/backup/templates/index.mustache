@@ -1,0 +1,185 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template koperedashboard_backup/index
+
+    Example context (json):
+    {
+        "moodledata_title": "Setting title",
+        "database_title": "Setting title"
+    }
+}}
+
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="kopere_dashboard-card h-100">
+                <h4>{{#str}}database_title, koperedashboard_backup{{/str}}</h4>
+                <p class="text-muted">{{#str}}database_desc, koperedashboard_backup{{/str}}</p>
+
+                <div class="alert alert-light" style="margin-bottom: 16px;">
+                    <strong>{{#str}}current_source_label, koperedashboard_backup{{/str}}</strong>
+                    {{{sourcedblabel}}}
+                </div>
+
+                {{#cangenerate}}
+                    <form method="post" action="">
+                        <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+                        <input type="hidden" name="action" value="database">
+
+                        <div class="form-group">
+                            <label for="id_dbformat">{{#str}}outputformat_label, koperedashboard_backup{{/str}}</label>
+                            <select id="id_dbformat" name="dbformat" class="custom-select form-control">
+                                {{#formats}}
+                                    <option value="{{{value}}}" {{#selected}}selected{{/selected}}>{{{label}}}</option>
+                                {{/formats}}
+                            </select>
+                            <small class="form-text text-muted">{{#str}}
+                                outputformat_desc, koperedashboard_backup{{/str}}</small>
+                        </div>
+
+                        <div class="form-group form-check" style="margin-top: 12px;">
+                            <input
+                                    type="checkbox"
+                                    class="form-check-input"
+                                    id="id_separatelogs"
+                                    name="separatelogs"
+                                    value="1"
+                                    {{#separatelogs}}checked{{/separatelogs}}>
+                            <label class="form-check-label" for="id_separatelogs">
+                                {{#str}}separatelogs_label, koperedashboard_backup{{/str}}
+                            </label>
+                            <small class="form-text text-muted">{{#str}}
+                                separatelogs_desc, koperedashboard_backup{{/str}}</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            {{#str}}action_generate_database, koperedashboard_backup{{/str}}
+                        </button>
+                    </form>
+                {{/cangenerate}}
+            </div>
+        </div>
+
+        <div class="col-12 col-md-3">
+            <div class="kopere_dashboard-card h-100">
+                <h4>{{#str}}moodledata_title, koperedashboard_backup{{/str}}</h4>
+                <p class="text-muted">{{#str}}moodledata_desc, koperedashboard_backup{{/str}}</p>
+
+                {{#cangenerate}}
+                    <form method="post" action="">
+                        <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+                        <input type="hidden" name="action" value="moodledata">
+                        <button type="submit" class="btn btn-primary">
+                            {{#str}}action_generate_moodledata, koperedashboard_backup{{/str}}
+                        </button>
+                    </form>
+                {{/cangenerate}}
+            </div>
+        </div>
+
+        <div class="col-12 col-md-3">
+            <div class="kopere_dashboard-card h-100">
+                <h4>{{#str}}friendly_installation_title, koperedashboard_backup{{/str}}</h4>
+                <p class="text-muted">{{#str}}friendly_installation_desc, koperedashboard_backup{{/str}}</p>
+
+                {{^is_alternative_file_system}}
+                    <div class="alert alert-warning">
+                        <h4>{{#str}}friendly_installation_alternative_not_title, koperedashboard_backup{{/str}}</h4>
+                        <p>{{#str}}friendly_installation_alternative_not_desc, koperedashboard_backup{{/str}}</p>
+                    </div>
+                {{/is_alternative_file_system}}
+
+                {{#is_alternative_file_system}}
+                    {{^is_alternative_missing}}
+                        <div class="alert alert-warning">
+                            <h4>{{#str}}friendly_installation_alternative_ok_title, koperedashboard_backup{{/str}}</h4>
+                            <p>{{#str}}friendly_installation_alternative_ok_desc, koperedashboard_backup,
+                                {{alternative_file_system_settings}} {{/str}}</p>
+                        </div>
+                    {{/is_alternative_missing}}
+                {{/is_alternative_file_system}}
+
+                {{#is_alternative_file_system}}
+                    {{#is_alternative_missing}}
+                        {{#cangenerate}}
+                            <form method="post">
+                                {{#alternative_storagename}}
+                                    <p>
+                                        <strong>Storage</strong>:
+                                        {{#alternative_storageurl}}
+                                            <a href="{{{alternative_storageurl}}}"
+                                               target="_blank">{{{alternative_storagename}}}</a>
+                                        {{/alternative_storageurl}}
+                                        {{^alternative_storageurl}}
+                                            {{{alternative_storagename}}}
+                                        {{/alternative_storageurl}}
+                                    </p>
+                                {{/alternative_storagename}}
+
+                                <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+                                <input type="hidden" name="action" value="friendly_installation">
+                                <button type="submit" class="btn btn-primary">
+                                    {{#str}}friendly_installation_generate, koperedashboard_backup{{/str}}
+                                </button>
+                            </form>
+                        {{/cangenerate}}
+                    {{/is_alternative_missing}}
+                {{/is_alternative_file_system}}
+            </div>
+        </div>
+    </div>
+
+<div class="kopere_dashboard-card" style="margin-top: 16px;">
+    <h4 style="margin-bottom: 16px;">{{#str}}history_title, koperedashboard_backup{{/str}}</h4>
+
+    {{#hasfiles}}
+        <table class="table table-striped kopere_dashboard-card-table">
+            <thead>
+            <tr>
+                <th>{{#str}}col_type, koperedashboard_backup{{/str}}</th>
+                <th>{{#str}}col_file, koperedashboard_backup{{/str}}</th>
+                <th>{{#str}}col_size, koperedashboard_backup{{/str}}</th>
+                <th>{{#str}}col_created, koperedashboard_backup{{/str}}</th>
+                <th>{{#str}}col_actions, koperedashboard_backup{{/str}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#files}}
+                <tr>
+                    <td>{{{type_label}}}</td>
+                    <td><code>{{{filename}}}</code></td>
+                    <td>{{{size}}}</td>
+                    <td>{{{timecreated}}}</td>
+                    <td style="white-space:nowrap;">
+                        <a class="btn btn-secondary btn-sm" href="{{{downloadurl}}}">
+                            {{#str}}action_download, koperedashboard_backup{{/str}}
+                        </a>
+                        <a class="btn btn-danger btn-sm" href="{{{deleteurl}}}">
+                            {{#str}}action_delete, koperedashboard_backup{{/str}}
+                        </a>
+                    </td>
+                </tr>
+            {{/files}}
+            </tbody>
+        </table>
+    {{/hasfiles}}
+
+    {{^hasfiles}}
+        <div class="alert alert-light" style="margin-bottom: 0;">{{#str}}
+            emptyfiles, koperedashboard_backup{{/str}}</div>
+    {{/hasfiles}}
+</div>

@@ -76,15 +76,64 @@ RUN git clone --depth 1 --branch ${MOODLE_VERSION} https://github.com/moodle/moo
 RUN cd ${MOODLE_DIR} \
     && composer install --no-dev --classmap-authoritative --no-interaction --no-progress --prefer-dist
 
+# =========================================================
+# TEMAS E PLUGINS ADICIONAIS
+# =========================================================
+
+# Tema Klassroom.
+COPY plugins/theme/klassroom \
+    ${MOODLE_DIR}/public/theme/klassroom
+
+# Plugins Kopere.
+COPY plugins/local/kopere_dashboard \
+    ${MOODLE_DIR}/public/local/kopere_dashboard
+
+COPY plugins/local/kopere_bi \
+    ${MOODLE_DIR}/public/local/kopere_bi
+
+COPY plugins/local/kopere_pay \
+    ${MOODLE_DIR}/public/local/kopere_pay
+
+# Valida a estrutura copiada.
+RUN set -eux; \
+    test -f ${MOODLE_DIR}/public/theme/klassroom/version.php; \
+    test -f ${MOODLE_DIR}/public/local/kopere_dashboard/version.php; \
+    test -f ${MOODLE_DIR}/public/local/kopere_bi/version.php; \
+    test -f ${MOODLE_DIR}/public/local/kopere_pay/version.php
+
+# =========================================================
+# CONFIGURAÇÕES DO CONTÊINER
+# =========================================================
+
 COPY php/php.ini /usr/local/etc/php/conf.d/custom.ini
 COPY nginx/default.conf /etc/nginx/sites-available/default
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 COPY moodle-cron.sh /usr/local/bin/moodle-cron.sh
 
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh /usr/local/bin/moodle-cron.sh \
+RUN chmod +x \
+        /usr/local/bin/docker-entrypoint.sh \
+        /usr/local/bin/moodle-cron.sh \
     && mkdir -p /run/nginx ${MOODLE_DATAROOT} \
-    && chown -R www-data:www-data ${MOODLE_DIR} ${MOODLE_DATAROOT}
+    && chown -R www-data:www-data \
+        ${MOODLE_DIR} \
+        ${MOODLE_DATAROOT} \
+    && find ${MOODLE_DIR}/public/theme/klassroom \
+        -type d -exec chmod 755 {} \; \
+    && find ${MOODLE_DIR}/public/theme/klassroom \
+        -type f -exec chmod 644 {} \; \
+    && find ${MOODLE_DIR}/public/local/kopere_dashboard \
+        -type d -exec chmod 755 {} \; \
+    && find ${MOODLE_DIR}/public/local/kopere_dashboard \
+        -type f -exec chmod 644 {} \; \
+    && find ${MOODLE_DIR}/public/local/kopere_bi \
+        -type d -exec chmod 755 {} \; \
+    && find ${MOODLE_DIR}/public/local/kopere_bi \
+        -type f -exec chmod 644 {} \; \
+    && find ${MOODLE_DIR}/public/local/kopere_pay \
+        -type d -exec chmod 755 {} \; \
+    && find ${MOODLE_DIR}/public/local/kopere_pay \
+        -type f -exec chmod 644 {} \;
 
 WORKDIR ${MOODLE_DIR}
 

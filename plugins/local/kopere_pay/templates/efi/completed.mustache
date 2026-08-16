@@ -1,0 +1,43 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_kopere_pay/efi/completed
+
+    Example context (json):
+    {
+      "expireat": "Feb 11, 2026 23:59 (BRT)",
+      "charge_id": "1234567890",
+      "qrcode_image": "https://example.com/pix/qrcode.png",
+      "qrcode": "00020126580014BR.GOV.BCB.PIX0136f3b2c1d4-5678-90ab-cdef-1234567890ab520400005303986540510.005802BR5913Kopere Pay6009SAO PAULO62140510ORDER1234566304ABCD",
+      "pdf-url": "https://example.com/boleto/1234567890.pdf"
+    }
+
+}}
+
+<div class="kopere_dashboard-card well2 text-center" style="margin: 0 auto">
+    {{#str}}efi_waiting_title, local_kopere_pay, {{{expireat}}}{{/str}}
+    {{#str}}transaction_number, local_kopere_pay, {{{charge_id}}}{{/str}}
+    <h2>{{#str}}pay_with_pix, local_kopere_pay{{/str}}</h2>
+
+    <p><img src="{{{qrcode_image}}}" style="width:250px;" alt="QRCode"></p>
+    <h4>{{#str}}or_copy_and_paste, local_kopere_pay{{/str}}</h4>
+    <pre style="word-wrap:break-word;font-size:14px;max-width:440px;width:100%;margin:0 auto;padding:10px;background:#e3e3e3;">{{{qrcode}}}</pre>
+
+    <h2>{{#str}}pay_with_boleto, local_kopere_pay{{/str}}</h2>
+    <a target="_blank" class="link-pay" href="{{{pdf-url}}}">{{#str}}access_boleto, local_kopere_pay{{/str}}</a>
+    <iframe src="{{{pdf-url}}}" style="width:100%;height:500px;border:none;"></iframe>
+</div>

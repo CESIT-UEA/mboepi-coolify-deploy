@@ -1,0 +1,54 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_kopere_pay/shopping/register-show
+
+    Example context (json):
+    {
+      "show_extra": false,
+      "extra": "",
+      "course": 123,
+      "formhtml": "<div class=\"form-group\"><label for=\"fullname\">Full name</label><input class=\"form-control\" type=\"text\" id=\"fullname\" name=\"fullname\" required></div><div class=\"form-group\"><label for=\"cpf\">Document ID</label><input class=\"form-control\" type=\"text\" id=\"cpf\" name=\"cpf\" required></div><div class=\"form-group\"><label for=\"phone\">Phone</label><input class=\"form-control\" type=\"tel\" id=\"phone\" name=\"phone\" required></div><button class=\"btn btn-primary\" type=\"submit\">Continue</button>",
+      "resume": "<div class=\"kopere_dashboard-card well2 order-area\"><h3 class=\"text-center\">Order Summary</h3><div class=\"clearfix\"><div class=\"order-left text-left\">Course price:</div><div class=\"order-right text-right\">$149.00</div></div><hr><div class=\"clearfix\"><div class=\"order-left text-left\"><strong>Total to pay</strong></div><div class=\"order-right text-right\"><strong>$149.00</strong></div></div></div>",
+      "extra-config": ""
+    }
+}}
+
+{{#show_extra}}
+    <div class="well">
+        <div class="well2">
+            {{{extra}}}
+        </div>
+    </div>
+{{/show_extra}}
+
+<div class="well">
+    <div class="row form-enrollment">
+        <div class="col-lg-7 col-12">
+            <div class="kopere_dashboard-card">
+                <form method="post">
+                    <input type="hidden" name="id" value="{{{course}}}">
+
+                    {{{formhtml}}}
+
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-5 col-12">{{{resume}}}</div>
+    </div>
+</div>
+{{{extra-config}}}

@@ -1,0 +1,38 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_kopere_pay/pix-completed
+
+    Example context (json):
+    {
+      "enrollment_id": "TXN-2026-000123",
+      "instrucoes": "<p><strong>Payment received via Pix.</strong></p><p>Your enrollment has been confirmed. You can now access the course area.</p><p>If you have any questions, reply to this email or contact our support.</p>",
+      "summary": "<hr><p><strong>Summary</strong></p><ul><li>Amount: R$ 249,90</li><li>Date: February 11, 2026</li><li>Method: Pix</li><li>Status: Completed</li></ul>"
+    }
+}}
+
+<div style='max-width: 720px;margin: 0 auto;'>
+    <div class='kopere_dashboard-card well2'>
+        <h2>Matrícula concluída e liberada.</h2>
+        {{#str}}transaction_number, local_kopere_pay{{/str}}
+        {{#str}}transaction_number, local_kopere_pay, {{{enrollment_id}}}{{/str}}
+
+        {{{instrucoes}}}
+
+        {{{summary}}}
+    </div>
+</div>

@@ -1,0 +1,55 @@
+{
+  "title": "Pagamentos",
+  "description": "",
+  "refkey": "payments",
+  "category": {
+    "title": "Kopere Pay",
+    "refkey": "koperepay",
+    "sortorder": 1,
+    "description": ""
+  },
+  "blocks": [
+    {
+      "refkey": "block-10",
+      "type": "block-1",
+      "sequence": 1,
+      "elements": [
+        {
+          "refkey": "todas-as-vendas",
+          "title": "Todas as vendas",
+          "block_num": 1,
+          "type": "table",
+          "theme": "light",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "   SELECT u.id AS u_id, \r\n          u.firstname, \r\n          u.lastname, \r\n          u.email,\r\n          c.id AS c_id, \r\n          c.fullname, \r\n          pm.method, \r\n          pm.value, \r\n          CASE \r\n            WHEN pm.status = 'waiting' THEN 'Aguardando pagamento'\r\n            WHEN pm.status = 'paid' THEN 'Pago'\r\n          END AS status_transaction,\r\n          pm.lasttime\r\n     FROM mdl_local_kopere_pay_enrollment pm\r\n     JOIN mdl_user                  u ON pm.userid = u.id\r\n     JOIN mdl_course                c ON pm.course = c.id\r\n    WHERE u.id      > 1\r\n      AND u.deleted = 0\r\n Group BY u.id\r\n ORDER BY u.firstname ASC, u.lastname ASC",
+          "cache": "1h",
+          "reload": "1h",
+          "info": "{\n    \"column\": {\n        \"u_id\": {\n            \"key\": \"u_id\",\n            \"title\": \"#\",\n            \"type\": \"userphotoRenderer\",\n            \"mustache\": \"\"\n        },\n        \"firstname\": {\n            \"key\": \"firstname\",\n            \"title\": \"lang::u_fullname::local_kopere_bi\",\n            \"type\": \"userfullname\",\n            \"mustache\": \"<a href=\\\"{{{config.wwwroot}}}\\\/user\\\/view.php?id={{{u_id}}}\\\"\\r\\n   target=\\\"profile\\\">{{{u_fullname}}}<\\\/a>\"\n        },\n        \"lastname\": {\n            \"key\": \"lastname\",\n            \"title\": \"lastname\",\n            \"type\": \"none\",\n            \"mustache\": \"\"\n        },\n        \"email\": {\n            \"key\": \"email\",\n            \"title\": \"lang::email::moodle\",\n            \"type\": \"string\",\n            \"mustache\": \"<a href=\\\"mailto:{{{email}}}\\\" target=\\\"_blank\\\">{{{email}}}<\\\/a>\"\n        },\n        \"c_id\": {\n            \"key\": \"c_id\",\n            \"title\": \"Cour\",\n            \"type\": \"none\",\n            \"mustache\": \"\"\n        },\n        \"fullname\": {\n            \"key\": \"fullname\",\n            \"title\": \"lang::fullname::moodle\",\n            \"type\": \"string\",\n            \"mustache\": \"<a href=\\\"{{{config.wwwroot}}}\\\/course\\\/view.php?id={{{c_id}}}\\\" target=\\\"_blank\\\">{{{fullname}}}<\\\/a>\"\n        },\n        \"method\": {\n            \"key\": \"method\",\n            \"title\": \"M\\u00e9todo\",\n            \"type\": \"string\",\n            \"mustache\": \"{{{method}}}\"\n        },\n        \"value\": {\n            \"key\": \"value\",\n            \"title\": \"Valor\",\n            \"type\": \"number\",\n            \"mustache\": \"{{{valor}}}\"\n        },\n        \"status_transaction\": {\n            \"key\": \"status_transaction\",\n            \"title\": \"Status da transa\\u00e7\\u00e3o\",\n            \"type\": \"string\",\n            \"mustache\": \"{{{status_transaction}}}\"\n        },\n        \"lasttime\": {\n            \"key\": \"lasttime\",\n            \"title\": \"lasttime\",\n            \"type\": \"datetimeRenderer\",\n            \"mustache\": \"\"\n        }\n    }\n}"
+        }
+      ]
+    },
+    {
+      "refkey": "block-12",
+      "type": "block-1",
+      "sequence": 2,
+      "elements": [
+        {
+          "refkey": "cursos-populares-por-pagamento",
+          "title": "Cursos Populares por Pagamento",
+          "block_num": 1,
+          "type": "table",
+          "theme": "light",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "SELECT \r\n    c.fullname,\r\n    COUNT(mp.id) AS num_students,\r\n    SUM(mp.value) AS total_amount_paid\r\nFROM mdl_course c\r\nJOIN mdl_local_kopere_pay_enrollment mp ON mp.course = c.id\r\nWHERE mp.status='paid'\r\nGROUP BY c.id\r\nORDER BY total_amount_paid DESC",
+          "cache": "6h",
+          "reload": "1h",
+          "info": "{\n    \"column\": {\n        \"fullname\": {\n            \"key\": \"fullname\",\n            \"title\": \"lang::fullname::moodle\",\n            \"type\": \"string\",\n            \"mustache\": \"{{{fullname}}}\"\n        },\n        \"num_students\": {\n            \"key\": \"num_students\",\n            \"title\": \"Quantos students\",\n            \"type\": \"number\",\n            \"mustache\": \"{{{num_students}}}\"\n        },\n        \"total_amount_paid\": {\n            \"key\": \"total_amount_paid\",\n            \"title\": \"Valor arrecadado\",\n            \"type\": \"number\",\n            \"mustache\": \"{{{total_amount_paid}}}\"\n        }\n    }\n}"
+        }
+      ]
+    }
+  ]
+}

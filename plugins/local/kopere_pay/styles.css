@@ -1,0 +1,1603 @@
+@charset "UTF-8";
+@media (min-width: 992px) {
+  .local-kopere-pay .enrollment-sticky-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 90px;
+    z-index: 9;
+  }
+}
+@media (max-width: 991px) {
+  .local-kopere-pay .enrollment-sticky-top {
+    position: relative;
+  }
+}
+.local-kopere-pay .mt--30 {
+  margin-top: 30px !important;
+}
+.local-kopere-pay .enrollment-page-top {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+}
+@media only screen and (max-width: 767px) {
+  .local-kopere-pay .enrollment-page-top {
+    height: auto;
+    padding: 60px 0;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .local-kopere-pay .enrollment-page-top {
+    height: auto;
+    padding: 120px 0;
+  }
+}
+.local-kopere-pay .enrollment-page-top .content {
+  position: relative;
+  z-index: 2;
+  padding-right: 10%;
+}
+.local-kopere-pay .enrollment-page-top .content h2 {
+  margin-bottom: 20px;
+  color: #192335;
+}
+.local-kopere-pay .enrollment-page-top .content p:last-child {
+  margin-bottom: 0;
+}
+.local-kopere-pay .enrollment-course-details-area .enrollment-paginas {
+  border-radius: 21px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 6px 13px 44px rgba(45, 55, 113, 0.4);
+  padding: 7px;
+}
+.local-kopere-pay .enrollment-course-details-area .enrollment-paginas .mainmenu {
+  display: flex;
+  padding: 0;
+  justify-content: space-between;
+  margin: -3px;
+  flex-wrap: wrap;
+}
+.local-kopere-pay .enrollment-course-details-area .enrollment-paginas .mainmenu li {
+  position: relative;
+  margin: 3px;
+  flex-grow: 1;
+  text-align: center;
+  color: #6a7284;
+}
+.local-kopere-pay .enrollment-course-details-area .enrollment-paginas .mainmenu li a {
+  color: #192335;
+  background: #f5f5f5;
+  margin: 0;
+  position: relative;
+  display: block;
+  z-index: 2;
+  padding: 10px 25px;
+  border-radius: 21px;
+  width: 100%;
+  opacity: 1;
+}
+.local-kopere-pay .enrollment-course-details-area .enrollment-paginas .mainmenu li.current a, .local-kopere-pay .enrollment-course-details-area .enrollment-paginas .mainmenu li:hover a {
+  color: #ffffff;
+  background: var(--bs-primary, #0d6efd);
+  font-weight: bold;
+  text-decoration: none;
+}
+.local-kopere-pay .enrollment-course-details-area .enrollment-paginas .mainmenu li.current a {
+  background: var(--bs-primary, #0d6efd);
+}
+.local-kopere-pay .enrollment-course-details-area .enrollment-paginas .mainmenu li::after {
+  position: absolute;
+  content: "";
+  left: 0;
+  background: rgba(0, 0, 0, 0.0392156863);
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  opacity: 1;
+  transition: 0.4s;
+  z-index: -1;
+  border-radius: 500px;
+}
+.local-kopere-pay .enrollment-course-details-area .enrollment-title {
+  margin-bottom: 24px;
+  font-size: 36px;
+  padding-bottom: 32px;
+  border-bottom: 2px solid rgba(230, 227, 241, 0.3098039216);
+}
+.local-kopere-pay .enrollment-btn {
+  padding: 0 26px;
+  height: 60px;
+  line-height: 60px;
+  color: #ffffff;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s ease-in-out;
+  border-radius: 6px;
+  border: 0 none;
+  outline: none;
+  text-decoration: none;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(37, 117, 252, 0.3);
+}
+.local-kopere-pay .enrollment-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 117, 252, 0.4);
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+}
+.local-kopere-pay .enrollment-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(37, 117, 252, 0.3);
+}
+.local-kopere-pay .enrollment-btn:focus {
+  box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.3);
+}
+.local-kopere-pay .course-sidebar {
+  background: var(--bs-primary, #0d6efd);
+  z-index: 10;
+  margin-top: 50px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 6px 34px rgba(215, 216, 222, 0.4117647059);
+  padding: 30px;
+}
+.local-kopere-pay .course-sidebar::before {
+  content: "";
+  z-index: -1;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  position: absolute;
+  background: var(--bs-body-color, #212529);
+  border-radius: 4px;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .local-kopere-pay .course-sidebar {
+    padding: 20px;
+  }
+}
+.local-kopere-pay .course-sidebar .enrollment-price {
+  display: flex;
+  align-items: center;
+}
+.local-kopere-pay .course-sidebar .enrollment-price .current-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.local-kopere-pay .course-sidebar .enrollment-price .off-price {
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: line-through;
+  opacity: 0.4;
+  margin-left: 7px;
+  color: #bcbcbc;
+}
+.local-kopere-pay .course-sidebar #image-popup-wrapper,
+.local-kopere-pay .course-sidebar #video-popup-wrapper {
+  position: relative;
+  display: block;
+  z-index: 2;
+}
+.local-kopere-pay .course-sidebar #image-popup-wrapper img,
+.local-kopere-pay .course-sidebar #video-popup-wrapper img {
+  border-radius: 6px !important;
+  width: 100% !important;
+  height: auto;
+}
+.local-kopere-pay .course-sidebar #image-popup-wrapper .position-to-top,
+.local-kopere-pay .course-sidebar #video-popup-wrapper .position-to-top {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+}
+.local-kopere-pay .course-sidebar #image-popup-wrapper .position-to-top .enrollment-btn.rounded-player-2,
+.local-kopere-pay .course-sidebar #video-popup-wrapper .position-to-top .enrollment-btn.rounded-player-2 {
+  border: 0;
+  width: 80px;
+  height: 80px;
+  transition: all 1s cubic-bezier(0, 0, 0.2, 1);
+  position: relative;
+  border-radius: 100%;
+  background: #ffffff;
+  margin: 0 auto;
+  display: inline-block;
+  padding: 0;
+}
+.local-kopere-pay .course-sidebar #image-popup-wrapper .position-to-top .enrollment-btn.rounded-player-2::before, .local-kopere-pay .course-sidebar #image-popup-wrapper .position-to-top .enrollment-btn.rounded-player-2::after,
+.local-kopere-pay .course-sidebar #video-popup-wrapper .position-to-top .enrollment-btn.rounded-player-2::before,
+.local-kopere-pay .course-sidebar #video-popup-wrapper .position-to-top .enrollment-btn.rounded-player-2::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: -1;
+  bottom: 0;
+  left: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  border-radius: 50%;
+  border: 1.5px solid #ffffff;
+  animation: ripple 2s linear 1s infinite;
+}
+.local-kopere-pay .course-sidebar #image-popup-wrapper .position-to-top .enrollment-btn.rounded-player-2::after,
+.local-kopere-pay .course-sidebar #video-popup-wrapper .position-to-top .enrollment-btn.rounded-player-2::after {
+  -webkit-animation: ripple 2s linear 1s infinite;
+  animation: ripple 2s linear 1s infinite;
+}
+.local-kopere-pay .course-sidebar #image-popup-wrapper .position-to-top .enrollment-btn.rounded-player-2::before,
+.local-kopere-pay .course-sidebar #video-popup-wrapper .position-to-top .enrollment-btn.rounded-player-2::before {
+  -webkit-animation: ripple 2s linear infinite;
+  animation: ripple 2s linear infinite;
+}
+.local-kopere-pay .course-sidebar #image-popup-wrapper .position-to-top .enrollment-btn.rounded-player-2 .play-icon,
+.local-kopere-pay .course-sidebar #video-popup-wrapper .position-to-top .enrollment-btn.rounded-player-2 .play-icon {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.local-kopere-pay .course-sidebar #image-popup-wrapper .position-to-top .enrollment-btn.rounded-player-2 .play-icon::before,
+.local-kopere-pay .course-sidebar #video-popup-wrapper .position-to-top .enrollment-btn.rounded-player-2 .play-icon::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: translate(-6px, -9px);
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 15px solid var(--bs-primary, #0d6efd);
+}
+.local-kopere-pay .course-sidebar #video-popup-wrapper::before {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgb(0, 0, 0) 100%);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 85%;
+  display: block;
+  z-index: 1;
+  content: "";
+  transition: opacity 0.65s cubic-bezier(0.05, 0.2, 0.1, 1);
+  cursor: pointer;
+  border-radius: 6px;
+}
+.local-kopere-pay .course-sidebar .enrollment-course-details-list-wrapper > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #e7e3ef;
+}
+.local-kopere-pay .course-sidebar .enrollment-course-details-list-wrapper > div span {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+}
+.local-kopere-pay .course-sidebar .enrollment-course-details-list-wrapper > div .enrollment-feature-value {
+  font-size: 12px;
+  background: #f6f6f6;
+  padding: 5px 7px;
+  display: flex;
+  height: 22px;
+  align-items: center;
+  border-radius: 6px;
+  justify-content: center;
+  width: max-content;
+}
+.local-kopere-pay .course-sidebar .enrollment-course-details-list-wrapper > div p {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.local-kopere-pay .course-sidebar .social-share-wrapper {
+  margin: 0 -19px -22px;
+  padding: 25px;
+  border-radius: 0 0 6px 6px;
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .local-kopere-pay .course-sidebar .social-share-wrapper {
+    margin: 0 -10px -10px;
+    padding: 20px;
+    border-radius: 6px;
+  }
+}
+.local-kopere-pay .course-sidebar .social-share-wrapper .social-default {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  justify-content: center;
+  margin: -5px;
+}
+.local-kopere-pay .course-sidebar .social-share-wrapper .social-default li {
+  margin: 5px;
+  color: #6a7284;
+}
+.local-kopere-pay .course-sidebar .social-share-wrapper .social-default li .social-default.transparent-with-border li a {
+  line-height: 41px;
+  background: transparent;
+  border: 2px solid #e6e3f2;
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 100%;
+  transition: 0.3s;
+  color: #6b7386;
+  z-index: 2;
+  position: relative;
+}
+.local-kopere-pay .course-sidebar .contact-with-us p {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+.local-kopere-pay .course-sidebar .contact-with-us .enrollment-badge-2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background: rgba(226, 213, 252, 0.8);
+  box-shadow: 0 12px 22px 0 rgba(214, 191, 242, 0.28);
+  padding: 0 20px;
+  border: 1px solid #ffffff;
+  border-radius: 500px;
+  line-height: 50px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  color: #192336;
+  width: max-content;
+}
+.local-kopere-pay .course-sidebar .contact-with-us .enrollment-badge-2 .icon {
+  width: 32px;
+  height: auto;
+}
+.local-kopere-pay .course-sidebar .contact-with-us .enrollment-badge-2 a {
+  font-weight: bold;
+}
+@keyframes ripple {
+  0% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  75% {
+    -webkit-transform: scale(1.9);
+    transform: scale(1.9);
+    opacity: 0.5;
+  }
+  100% {
+    -webkit-transform: scale(2.3);
+    transform: scale(2.3);
+    opacity: 0;
+  }
+}
+.local-kopere-pay .nav.nav-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 14px -1px;
+  padding: 0;
+  list-style: none;
+  border-bottom: 1px solid #d7dfe7;
+}
+.local-kopere-pay .nav.nav-tabs > li {
+  margin: 0;
+  padding: 0;
+}
+.local-kopere-pay .nav.nav-tabs > li > a {
+  display: block;
+  padding: 10px 16px;
+  color: #495057;
+  font-weight: 500;
+  line-height: 1.3;
+  text-decoration: none;
+  background: #f8f9fa;
+  border: 1px solid #d7dfe7;
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.local-kopere-pay .nav.nav-tabs > li > a:hover, .local-kopere-pay .nav.nav-tabs > li > a:focus {
+  color: #0f3d5c;
+  background: #eef5fb;
+  border-color: #bfd3e4;
+  text-decoration: none;
+}
+.local-kopere-pay .nav.nav-tabs > li.active > a {
+  color: #0f3d5c;
+  font-weight: 700;
+  background: #ffffff;
+  border-color: #d7dfe7;
+  border-bottom: 1px solid #ffffff;
+  margin-bottom: -1px;
+  cursor: default;
+}
+@media (max-width: 768px) {
+  .local-kopere-pay .nav.nav-tabs {
+    border-bottom: none;
+  }
+  .local-kopere-pay .nav.nav-tabs > li {
+    width: 100%;
+  }
+  .local-kopere-pay .nav.nav-tabs > li > a {
+    border: 1px solid #d7dfe7;
+    border-radius: 8px;
+  }
+  .local-kopere-pay .nav.nav-tabs > li.active > a {
+    border-bottom: 1px solid #d7dfe7;
+    margin-bottom: 0;
+  }
+}
+.local-kopere-pay form.validate {
+  max-width: 920px;
+}
+.local-kopere-pay form.validate .displayErroForm {
+  margin-bottom: 1.25rem;
+  border-radius: 0.5rem;
+}
+.local-kopere-pay form.validate .displayErroForm span {
+  display: block;
+  font-weight: 600;
+}
+.local-kopere-pay form.validate .form-group {
+  margin-bottom: 1.25rem;
+}
+.local-kopere-pay form.validate .form-group > label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: var(--gray-dark, #343a40);
+}
+.local-kopere-pay form.validate .form-group input[type=text],
+.local-kopere-pay form.validate .form-group input[type=email],
+.local-kopere-pay form.validate .form-group input[type=password],
+.local-kopere-pay form.validate .form-group input[type=number],
+.local-kopere-pay form.validate .form-group input[type=url],
+.local-kopere-pay form.validate .form-group input[type=tel],
+.local-kopere-pay form.validate .form-group input[type=date],
+.local-kopere-pay form.validate .form-group input[type=time],
+.local-kopere-pay form.validate .form-group input[type=datetime-local],
+.local-kopere-pay form.validate .form-group select,
+.local-kopere-pay form.validate .form-group textarea {
+  max-width: 100%;
+  min-height: 38px;
+  border: 1px solid var(--gray-400, #ced4da);
+  border-radius: 0.35rem;
+  background-color: var(--white, #fff);
+  color: var(--gray-900, #212529);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.local-kopere-pay form.validate .form-group input[type=text]:focus,
+.local-kopere-pay form.validate .form-group input[type=email]:focus,
+.local-kopere-pay form.validate .form-group input[type=password]:focus,
+.local-kopere-pay form.validate .form-group input[type=number]:focus,
+.local-kopere-pay form.validate .form-group input[type=url]:focus,
+.local-kopere-pay form.validate .form-group input[type=tel]:focus,
+.local-kopere-pay form.validate .form-group input[type=date]:focus,
+.local-kopere-pay form.validate .form-group input[type=time]:focus,
+.local-kopere-pay form.validate .form-group input[type=datetime-local]:focus,
+.local-kopere-pay form.validate .form-group select:focus,
+.local-kopere-pay form.validate .form-group textarea:focus {
+  border-color: var(--primary, #0f6cbf);
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(15, 108, 191, 0.15);
+}
+.local-kopere-pay form.validate .form-group input[type=text]:disabled, .local-kopere-pay form.validate .form-group input[type=text][readonly],
+.local-kopere-pay form.validate .form-group input[type=email]:disabled,
+.local-kopere-pay form.validate .form-group input[type=email][readonly],
+.local-kopere-pay form.validate .form-group input[type=password]:disabled,
+.local-kopere-pay form.validate .form-group input[type=password][readonly],
+.local-kopere-pay form.validate .form-group input[type=number]:disabled,
+.local-kopere-pay form.validate .form-group input[type=number][readonly],
+.local-kopere-pay form.validate .form-group input[type=url]:disabled,
+.local-kopere-pay form.validate .form-group input[type=url][readonly],
+.local-kopere-pay form.validate .form-group input[type=tel]:disabled,
+.local-kopere-pay form.validate .form-group input[type=tel][readonly],
+.local-kopere-pay form.validate .form-group input[type=date]:disabled,
+.local-kopere-pay form.validate .form-group input[type=date][readonly],
+.local-kopere-pay form.validate .form-group input[type=time]:disabled,
+.local-kopere-pay form.validate .form-group input[type=time][readonly],
+.local-kopere-pay form.validate .form-group input[type=datetime-local]:disabled,
+.local-kopere-pay form.validate .form-group input[type=datetime-local][readonly],
+.local-kopere-pay form.validate .form-group select:disabled,
+.local-kopere-pay form.validate .form-group select[readonly],
+.local-kopere-pay form.validate .form-group textarea:disabled,
+.local-kopere-pay form.validate .form-group textarea[readonly] {
+  background-color: var(--gray-100, #f8f9fa);
+  cursor: not-allowed;
+  opacity: 0.85;
+}
+.local-kopere-pay form.validate .form-group input[type=text],
+.local-kopere-pay form.validate .form-group input[type=email],
+.local-kopere-pay form.validate .form-group input[type=password],
+.local-kopere-pay form.validate .form-group input[type=number],
+.local-kopere-pay form.validate .form-group input[type=url],
+.local-kopere-pay form.validate .form-group input[type=tel],
+.local-kopere-pay form.validate .form-group input[type=date],
+.local-kopere-pay form.validate .form-group input[type=time],
+.local-kopere-pay form.validate .form-group input[type=datetime-local],
+.local-kopere-pay form.validate .form-group textarea {
+  width: 100%;
+  padding: 0.45rem 0.65rem;
+}
+.local-kopere-pay form.validate .form-group textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+.local-kopere-pay form.validate .form-group input[type=file] {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px dashed var(--gray-400, #ced4da);
+  border-radius: 0.35rem;
+  background-color: var(--gray-100, #f8f9fa);
+}
+.local-kopere-pay form.validate .form-group input[type=checkbox],
+.local-kopere-pay form.validate .form-group input[type=radio] {
+  margin-right: 0.35rem;
+}
+.local-kopere-pay form.validate .help-block,
+.local-kopere-pay form.validate .form-text.with-errors {
+  margin-top: 0.35rem;
+  font-size: 0.875rem;
+  color: var(--gray-600, #6c757d);
+}
+.local-kopere-pay form.validate .help-block:empty,
+.local-kopere-pay form.validate .form-text.with-errors:empty {
+  display: none;
+}
+.local-kopere-pay form.validate .has-error input,
+.local-kopere-pay form.validate .has-error select,
+.local-kopere-pay form.validate .has-error textarea,
+.local-kopere-pay form.validate .has-danger input,
+.local-kopere-pay form.validate .has-danger select,
+.local-kopere-pay form.validate .has-danger textarea,
+.local-kopere-pay form.validate .type_error input,
+.local-kopere-pay form.validate .type_error select,
+.local-kopere-pay form.validate .type_error textarea {
+  border-color: var(--danger, #ca3120);
+}
+.local-kopere-pay form.validate .has-error input:focus,
+.local-kopere-pay form.validate .has-error select:focus,
+.local-kopere-pay form.validate .has-error textarea:focus,
+.local-kopere-pay form.validate .has-danger input:focus,
+.local-kopere-pay form.validate .has-danger select:focus,
+.local-kopere-pay form.validate .has-danger textarea:focus,
+.local-kopere-pay form.validate .type_error input:focus,
+.local-kopere-pay form.validate .type_error select:focus,
+.local-kopere-pay form.validate .type_error textarea:focus {
+  box-shadow: 0 0 0 0.2rem rgba(202, 49, 32, 0.15);
+}
+.local-kopere-pay form.validate .has-error .help-block,
+.local-kopere-pay form.validate .has-error .form-text.with-errors,
+.local-kopere-pay form.validate .has-danger .help-block,
+.local-kopere-pay form.validate .has-danger .form-text.with-errors,
+.local-kopere-pay form.validate .type_error .help-block,
+.local-kopere-pay form.validate .type_error .form-text.with-errors {
+  color: var(--danger, #ca3120);
+}
+.local-kopere-pay form.validate .form-check {
+  margin-bottom: 1rem;
+  padding-left: 0;
+}
+.local-kopere-pay form.validate .form-check .form-check-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.local-kopere-pay form.validate .form-check input[type=checkbox],
+.local-kopere-pay form.validate .form-check input[type=radio] {
+  flex: 0 0 auto;
+  margin-top: 0.2rem;
+  margin-right: 0;
+}
+.local-kopere-pay form.validate .form-section {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0 1rem;
+  color: var(--primary, #0f6cbf);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+.local-kopere-pay form.validate .form-section::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  margin-left: 0.75rem;
+  background-color: var(--gray-300, #dee2e6);
+}
+.local-kopere-pay form.validate .form-section span {
+  display: inline-block;
+}
+.local-kopere-pay form.validate .panel.panel-default {
+  overflow: hidden;
+  border: 1px solid var(--gray-300, #dee2e6);
+  border-radius: 0.5rem;
+  background-color: var(--white, #fff);
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.04);
+}
+.local-kopere-pay form.validate .panel.panel-default .panel-body {
+  padding: 1rem;
+}
+.local-kopere-pay form.validate .margin-form {
+  margin-top: 1.5rem;
+}
+.local-kopere-pay form.validate .margin-left-15 {
+  margin-left: 15px;
+}
+.local-kopere-pay form.validate .bt-submit {
+  min-width: 160px;
+  font-weight: 600;
+}
+.local-kopere-pay form.validate .area_btsubmit {
+  padding-top: 0.5rem;
+}
+.local-kopere-pay form.validate .modal-footer.margin-form {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1rem 0 0;
+  border-top: 1px solid var(--gray-300, #dee2e6);
+}
+.local-kopere-pay form.validate .modal-footer.margin-form .margin-left-15 {
+  margin-left: 0;
+}
+@media (max-width: 575.98px) {
+  .local-kopere-pay form.validate .modal-footer.margin-form {
+    flex-direction: column-reverse;
+  }
+  .local-kopere-pay form.validate .modal-footer.margin-form .btn,
+  .local-kopere-pay form.validate .modal-footer.margin-form input[type=submit] {
+    width: 100%;
+  }
+  .local-kopere-pay form.validate .bt-submit {
+    width: 100%;
+  }
+}
+.local-kopere-pay .course_detail-details {
+  --kopere-primary: #2563eb;
+  --kopere-primary-dark: #1d4ed8;
+  --kopere-border: #e5e7eb;
+  --kopere-bg: #ffffff;
+  --kopere-bg-soft: #f8fafc;
+  --kopere-text: #1f2937;
+  --kopere-muted: #6b7280;
+  background: var(--kopere-bg);
+  border: 1px solid var(--kopere-border);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+}
+.local-kopere-pay .course_detail-details fieldset {
+  margin: 0 0 28px;
+  padding: 0 0 28px;
+  border: 0;
+  border-bottom: 1px solid var(--kopere-border);
+}
+.local-kopere-pay .course_detail-details fieldset:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+.local-kopere-pay .course_detail-details fieldset h3 {
+  margin: 0 0 10px;
+  color: var(--kopere-text);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+.local-kopere-pay .course_detail-details fieldset h3.mb-0 {
+  margin-bottom: 0;
+}
+.local-kopere-pay .course_detail-details fieldset h4 {
+  color: var(--kopere-text);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.local-kopere-pay .course_detail-details fieldset p {
+  margin: 8px 0 18px;
+  color: var(--kopere-muted);
+  line-height: 1.5;
+}
+.local-kopere-pay .course_detail-details fieldset p a {
+  color: var(--kopere-primary);
+  font-weight: 600;
+  word-break: break-all;
+  text-decoration: none;
+}
+.local-kopere-pay .course_detail-details fieldset p a:hover {
+  color: var(--kopere-primary-dark);
+  text-decoration: underline;
+}
+.local-kopere-pay .course_detail-details .p-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0 0 18px;
+}
+.local-kopere-pay .course_detail-details .p-flex .link-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 74px;
+  padding: 14px 18px;
+  background: var(--kopere-bg-soft);
+  border: 1px solid var(--kopere-border);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+}
+.local-kopere-pay .course_detail-details .p-flex .link-area img {
+  display: block;
+  max-width: 180px;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  pointer-events: none;
+}
+.local-kopere-pay .course_detail-details .p-flex .link-area:hover, .local-kopere-pay .course_detail-details .p-flex .link-area:focus {
+  background: #ffffff;
+  border-color: rgba(37, 99, 235, 0.45);
+  box-shadow: 0 10px 22px rgba(37, 99, 235, 0.14);
+  transform: translateY(-2px);
+  outline: none;
+}
+.local-kopere-pay .course_detail-details .p-flex .link-area:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 12px rgba(37, 99, 235, 0.12);
+}
+.local-kopere-pay .course_detail-details .p-flex .link-area.active, .local-kopere-pay .course_detail-details .p-flex .link-area.selected {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: var(--kopere-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+}
+.local-kopere-pay .course_detail-details .show-area {
+  display: none;
+  margin-top: 26px;
+  padding: 22px;
+  background: linear-gradient(180deg, #ffffff 0%, var(--kopere-bg-soft) 100%);
+  border: 1px solid var(--kopere-border);
+  border-radius: 18px;
+  animation: kopereShowArea 0.22s ease-out;
+}
+.local-kopere-pay .course_detail-details .show-area.is-open {
+  display: block !important;
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area {
+  position: relative;
+  margin-bottom: 26px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid var(--kopere-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.06);
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area:last-child {
+  margin-bottom: 0;
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.15rem;
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area h4 {
+  margin-top: 18px;
+  margin-bottom: 8px;
+  color: var(--kopere-muted);
+  font-size: 0.92rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area img {
+  display: inline-block;
+  max-width: 100%;
+  margin: 8px 0 4px;
+  padding: 8px 12px;
+  background: var(--kopere-bg-soft);
+  border: 1px dashed var(--kopere-border);
+  border-radius: 10px;
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area img.img-area-p {
+  height: 30px;
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area img.img-area-m {
+  height: 50px;
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area img.img-area-g {
+  height: 70px;
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area .copy-code {
+  min-height: 54px;
+  max-height: 240px;
+  margin: 8px 0 0;
+  padding: 16px 54px 16px 16px;
+  overflow: auto;
+  background: #0f172a;
+  color: #e5e7eb;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area .copi-code-icon {
+  position: absolute;
+  right: 32px;
+  bottom: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px;
+  color: #ffffff;
+  background: var(--kopere-primary);
+  border-radius: 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area .copi-code-icon .text-copiar {
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area .copi-code-icon svg {
+  width: 18px !important;
+  height: 18px !important;
+  fill: currentColor;
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area .copi-code-icon:hover {
+  background: var(--kopere-primary-dark);
+  box-shadow: 0 8px 16px rgba(37, 99, 235, 0.25);
+  transform: translateY(-1px);
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area .copi-code-icon:active {
+  transform: translateY(0);
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area .copi-code-icon.copied {
+  background: #16a34a;
+}
+.local-kopere-pay .course_detail-details .show-area .copy-code-area .copi-code-icon.copied .text-copiar::after {
+  content: "!";
+}
+@media (max-width: 768px) {
+  .local-kopere-pay .course_detail-details {
+    padding: 16px;
+  }
+  .local-kopere-pay .course_detail-details .p-flex {
+    gap: 10px;
+  }
+  .local-kopere-pay .course_detail-details .p-flex .link-area {
+    width: calc(50% - 5px);
+    min-height: 68px;
+    padding: 12px;
+  }
+  .local-kopere-pay .course_detail-details .show-area {
+    padding: 14px;
+  }
+  .local-kopere-pay .course_detail-details .show-area .copy-code-area {
+    padding: 16px;
+  }
+  .local-kopere-pay .course_detail-details .show-area .copy-code-area .copy-code {
+    padding-right: 16px;
+  }
+  .local-kopere-pay .course_detail-details .show-area .copy-code-area .copi-code-icon {
+    position: static;
+    margin-top: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .local-kopere-pay .course_detail-details .p-flex .link-area {
+    width: 100%;
+  }
+}
+@keyframes kopereShowArea {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.local-kopere-pay .course_detail-edit [name=price],
+.local-kopere-pay .course_detail-edit [name=days],
+.local-kopere-pay .course_detail-edit [name=students] {
+  width: 120px;
+}
+.local-kopere-pay .course_detail-edit [name=date] {
+  width: 210px;
+}
+
+.local_kopere_pay_enrollment .btn {
+  height: auto !important;
+}
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox {
+  --size: 33px;
+}
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox {
+  position: relative;
+  background: linear-gradient(90deg, #f19af3, #f099b5);
+  background: var(--bs-primary, #0d6efd);
+  line-height: 0;
+  perspective: 400px;
+  font-size: var(--size);
+}
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox,
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox input[type=checkbox],
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox label,
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox label::before,
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox label::after {
+  appearance: none;
+  display: inline-block;
+  border-radius: var(--size);
+  border: 0;
+  transition: 0.35s ease-in-out;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox label {
+  width: calc(2.2 * var(--size));
+  height: var(--size);
+  background: #d7d7d7;
+  overflow: hidden;
+  margin: 0;
+}
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox input[type=checkbox] {
+  position: absolute;
+  z-index: 1;
+  width: calc(0.8 * var(--size));
+  height: calc(0.8 * var(--size));
+  top: calc(0.1 * var(--size));
+  left: calc(0.1 * var(--size));
+  background: linear-gradient(45deg, #dedede, #ffffff);
+  box-shadow: 0 6px 7px rgba(0, 0, 0, 0.3);
+  outline: none;
+  margin: 0;
+}
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox input[type=checkbox]:checked {
+  left: calc(1.3 * var(--size));
+}
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox input[type=checkbox]:checked + label {
+  background: transparent;
+}
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox label::before,
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox label::after {
+  content: "· ·";
+  position: absolute;
+  overflow: hidden;
+  left: calc(0.15 * var(--size));
+  top: calc(0.5 * var(--size));
+  height: var(--size);
+  letter-spacing: calc(-0.04 * var(--size));
+  color: #9b9b9b;
+  font-family: "Times New Roman", serif;
+  z-index: 2;
+  font-size: calc(0.6 * var(--size));
+  border-radius: 0;
+  transform-origin: 0 0 calc(-0.5 * var(--size));
+  backface-visibility: hidden;
+}
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox label::after {
+  content: "●";
+  top: calc(0.65 * var(--size));
+  left: calc(0.2 * var(--size));
+  height: calc(0.1 * var(--size));
+  width: calc(0.35 * var(--size));
+  font-size: calc(0.2 * var(--size));
+  transform-origin: 0 0 calc(-0.4 * var(--size));
+}
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox input[type=checkbox]:checked + label::before,
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox input[type=checkbox]:checked + label::after {
+  left: calc(1.55 * var(--size));
+  top: calc(0.4 * var(--size));
+  line-height: calc(0.1 * var(--size));
+  transform: rotateY(360deg);
+}
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox input[type=checkbox]:checked + label::after {
+  height: calc(0.16 * var(--size));
+  top: calc(0.55 * var(--size));
+  left: calc(1.6 * var(--size));
+  font-size: calc(0.6 * var(--size));
+  line-height: 0;
+}
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox input[type=checkbox].validator-error + .label {
+  background: #f2dede;
+}
+.local_kopere_pay_enrollment .enrollment .kopere-checkbox .validator-error {
+  position: absolute;
+  top: var(--size);
+  left: calc(2.4 * var(--size));
+  font-size: 16px;
+  width: fit-content;
+  height: 20px;
+  padding-top: 0;
+  line-height: 20px;
+  white-space: nowrap;
+}
+.local_kopere_pay_enrollment .enrollment .botao,
+.local_kopere_pay_enrollment .enrollment .link-pay {
+  background-color: #3aadaa;
+  border: 1px solid #3aadaa;
+  color: #ffffff;
+  padding: 12px 25px;
+  margin-top: 22px;
+  margin-bottom: 4px;
+  font-size: 19px;
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
+  border-radius: 3px;
+  transition: all 0.4s linear 0s;
+  white-space: break-spaces;
+  line-height: 35px;
+}
+.local_kopere_pay_enrollment .enrollment .botao:hover, .local_kopere_pay_enrollment .enrollment .botao:focus, .local_kopere_pay_enrollment .enrollment .botao:active,
+.local_kopere_pay_enrollment .enrollment .link-pay:hover,
+.local_kopere_pay_enrollment .enrollment .link-pay:focus,
+.local_kopere_pay_enrollment .enrollment .link-pay:active {
+  text-decoration: none;
+  color: #3aadaa;
+  background-color: transparent;
+}
+.local_kopere_pay_enrollment .enrollment .botao:disabled,
+.local_kopere_pay_enrollment .enrollment .link-pay:disabled {
+  background-color: #8dadac;
+}
+.local_kopere_pay_enrollment .enrollment .link-pay {
+  background-color: #ef5350;
+  border: 1px solid #ef5350;
+}
+.local_kopere_pay_enrollment .enrollment .link-pay:hover, .local_kopere_pay_enrollment .enrollment .link-pay:focus, .local_kopere_pay_enrollment .enrollment .link-pay:active {
+  color: #ff5653;
+}
+.local_kopere_pay_enrollment .enrollment .link-pay:disabled {
+  background-color: #e9bcb3;
+}
+.local_kopere_pay_enrollment .enrollment .well {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  color: #343a40;
+  background: #f6f7fb;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+.local_kopere_pay_enrollment .enrollment .well .well2 {
+  background-color: #ffffff;
+  border: nonew;
+}
+.local_kopere_pay_enrollment .enrollment .well h2 {
+  margin-top: 0;
+  margin-bottom: 22px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #24292f;
+}
+.local_kopere_pay_enrollment .enrollment .well2 {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+  padding: 22px;
+  border-radius: 14px;
+}
+.local_kopere_pay_enrollment .enrollment label {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 0;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+.local_kopere_pay_enrollment .enrollment select,
+.local_kopere_pay_enrollment .enrollment textarea,
+.local_kopere_pay_enrollment .enrollment input[type=text],
+.local_kopere_pay_enrollment .enrollment input[type=email],
+.local_kopere_pay_enrollment .enrollment input[type=password] {
+  max-width: 80000px !important;
+  width: 70%;
+  padding: 10px 15px;
+  font-size: 17px;
+  line-height: 1.25;
+  color: #464a4c;
+  background-clip: padding-box;
+  border: 1px solid #cecece;
+  border-radius: 0.25rem;
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  font-weight: 300;
+}
+@media (max-width: 768px) {
+  .local_kopere_pay_enrollment .enrollment select,
+  .local_kopere_pay_enrollment .enrollment textarea,
+  .local_kopere_pay_enrollment .enrollment input[type=text],
+  .local_kopere_pay_enrollment .enrollment input[type=email],
+  .local_kopere_pay_enrollment .enrollment input[type=password] {
+    width: 100%;
+  }
+}
+.local_kopere_pay_enrollment .enrollment select.mask_datahora,
+.local_kopere_pay_enrollment .enrollment textarea.mask_datahora,
+.local_kopere_pay_enrollment .enrollment input[type=text].mask_datahora,
+.local_kopere_pay_enrollment .enrollment input[type=email].mask_datahora,
+.local_kopere_pay_enrollment .enrollment input[type=password].mask_datahora {
+  width: 167px !important;
+  min-width: initial !important;
+  max-width: initial !important;
+}
+.local_kopere_pay_enrollment .enrollment select.mask_data,
+.local_kopere_pay_enrollment .enrollment textarea.mask_data,
+.local_kopere_pay_enrollment .enrollment input[type=text].mask_data,
+.local_kopere_pay_enrollment .enrollment input[type=email].mask_data,
+.local_kopere_pay_enrollment .enrollment input[type=password].mask_data {
+  width: 122px !important;
+  min-width: initial !important;
+  max-width: initial !important;
+}
+.local_kopere_pay_enrollment .enrollment select {
+  width: initial;
+}
+.local_kopere_pay_enrollment .enrollment #nome {
+  width: 80%;
+}
+@media (max-width: 768px) {
+  .local_kopere_pay_enrollment .enrollment #nome {
+    width: 100%;
+  }
+}
+.local_kopere_pay_enrollment .enrollment .help-block {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #828080;
+  margin-left: 8px;
+  font-style: italic;
+  font-size: 14px;
+}
+.local_kopere_pay_enrollment .enrollment .bt-submit {
+  width: auto;
+}
+.local_kopere_pay_enrollment .enrollment #cpf {
+  width: 198px;
+}
+.local_kopere_pay_enrollment .enrollment #senha, .local_kopere_pay_enrollment .enrollment #senha2 {
+  width: 150px;
+}
+.local_kopere_pay_enrollment .enrollment #telefone, .local_kopere_pay_enrollment .enrollment #celular {
+  width: 220px;
+}
+.local_kopere_pay_enrollment .enrollment #birth {
+  width: 130px;
+}
+.local_kopere_pay_enrollment .enrollment .validator-error {
+  background-color: #f2dede;
+}
+.local_kopere_pay_enrollment .enrollment .botao-meio {
+  margin: 0 0 15px;
+}
+.local_kopere_pay_enrollment .enrollment .botao-meio img {
+  height: 30px;
+  width: auto;
+}
+.local_kopere_pay_enrollment .enrollment .well2 {
+  border-radius: 10px;
+}
+.local_kopere_pay_enrollment .enrollment .order-area {
+  max-width: 750px;
+  margin: 0 auto 20px;
+  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #dfe3ea;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.07);
+}
+.local_kopere_pay_enrollment .enrollment .order-area h3 {
+  margin-bottom: 18px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #343a40;
+}
+.local_kopere_pay_enrollment .enrollment .order-area .order-left,
+.local_kopere_pay_enrollment .enrollment .order-area .order-right {
+  width: 49%;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.local_kopere_pay_enrollment .enrollment .order-area .order-left {
+  float: left;
+  color: #495057;
+}
+.local_kopere_pay_enrollment .enrollment .order-area .order-right {
+  float: right;
+  color: #2f3439;
+  font-weight: 500;
+}
+.local_kopere_pay_enrollment .enrollment .order-area .clearfix::before {
+  margin-top: 7px;
+}
+.local_kopere_pay_enrollment .enrollment .order-area hr {
+  border-top: 1px solid #d8d5d5;
+  margin: 18px 0;
+  border-top-color: #edf0f4;
+}
+.local_kopere_pay_enrollment .enrollment .order-area td, .local_kopere_pay_enrollment .enrollment .order-area th {
+  padding: 5px;
+}
+@media (max-width: 991px) {
+  .local_kopere_pay_enrollment .enrollment .order-up {
+    order: -1;
+  }
+}
+@media (min-width: 680px) {
+  .local_kopere_pay_enrollment .enrollment .registration-display-flex > div {
+    width: 50%;
+    width: fit-content;
+    max-width: 50%;
+  }
+  .local_kopere_pay_enrollment .enrollment .registration-display-flex input {
+    width: 98%;
+  }
+}
+.local_kopere_pay_enrollment .enrollment fieldset {
+  background: #ffffff;
+  margin: 24px 0 0;
+  padding: 22px 18px 18px;
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+}
+.local_kopere_pay_enrollment .enrollment fieldset legend {
+  width: auto;
+  float: none;
+  margin: 0 0 0 18px;
+  padding: 0 10px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #343a40;
+  background: #ffffff;
+}
+.local_kopere_pay_enrollment .enrollment label {
+  margin-bottom: 6px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #3f444a;
+}
+.local_kopere_pay_enrollment .enrollment input,
+.local_kopere_pay_enrollment .enrollment select,
+.local_kopere_pay_enrollment .enrollment textarea {
+  border: 1px solid #d8dee6;
+  border-radius: 7px;
+  background-color: #ffffff;
+  box-shadow: none;
+  width: 100% !important;
+}
+.local_kopere_pay_enrollment .enrollment input:focus,
+.local_kopere_pay_enrollment .enrollment select:focus,
+.local_kopere_pay_enrollment .enrollment textarea:focus {
+  border-color: #5b9bd5;
+  box-shadow: 0 0 0 3px rgba(91, 155, 213, 0.16);
+  outline: none;
+}
+.local_kopere_pay_enrollment .enrollment .registration-display-flex {
+  display: flex;
+  gap: 20px;
+}
+.local_kopere_pay_enrollment .enrollment #media-header {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 13px;
+  margin-bottom: -1px;
+}
+.local_kopere_pay_enrollment .enrollment #media-header .media-tab {
+  display: flex;
+  align-items: center;
+  border-radius: 6px 6px 0 0;
+  cursor: pointer;
+  user-select: none;
+  background: #d3d3d3;
+  border: none;
+  padding: 8px;
+  margin: 5px 0 -1px 5px;
+}
+.local_kopere_pay_enrollment .enrollment #media-header .media-tab.active {
+  background: #ffffff;
+  border: 1px solid #d3d3d3;
+  border-bottom: none;
+}
+.local_kopere_pay_enrollment .enrollment #media-header .media-tab .media-icon {
+  height: 30px;
+  margin-right: 4px;
+}
+.local_kopere_pay_enrollment .enrollment #media-header .media-tab .media-text {
+  white-space: nowrap;
+}
+.local_kopere_pay_enrollment .enrollment .media-tab-area {
+  display: none;
+}
+.local_kopere_pay_enrollment .yui3-widget-mask,
+.local_kopere_pay_enrollment .moodle-dialogue-base {
+  display: none !important;
+}
+.local_kopere_pay_enrollment body.lockscroll {
+  overflow: auto !important;
+}
+.local_kopere_pay_enrollment .block-create-page form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.local_kopere_pay_enrollment .block-create-page form .form-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.local_kopere_pay_enrollment .p-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.local_kopere_pay_enrollment .p-flex .link-area img {
+  width: 160px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.62);
+  border-radius: 9px;
+  margin-right: 10px;
+}
+.local_kopere_pay_enrollment .p-flex .link-area.modelo-2 img {
+  border-radius: 18px;
+}
+.local_kopere_pay_enrollment .show-area {
+  display: none;
+}
+.local_kopere_pay_enrollment .show-area .copy-code {
+  white-space: break-spaces;
+  font-family: monospace;
+  font-size: 16px;
+  padding: 4px;
+  background: #e0e0e0;
+  border: 2px solid #adabad;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 3px;
+}
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .custom-select,
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] select.quickgrade {
+  background: #17181b url("[[pix:theme|dark/custom-select]]") right 10px center/8px 10px no-repeat;
+}
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .modal .modal-content .modal-header .btn-close:before,
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .modal .modal-content .moodle-dialogue-hd .btn-close:before,
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .modal .moodle-dialogue-wrap .modal-header .btn-close:before,
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .modal .moodle-dialogue-wrap .moodle-dialogue-hd .btn-close:before,
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .moodle-dialogue .modal-content .modal-header .btn-close:before,
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .moodle-dialogue .modal-content .moodle-dialogue-hd .btn-close:before,
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .moodle-dialogue .moodle-dialogue-wrap .modal-header .btn-close:before,
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .moodle-dialogue .moodle-dialogue-wrap .moodle-dialogue-hd .btn-close:before {
+  background-image: url("[[pix:theme|dark/close-button]]");
+}
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .fp-pathbar .fp-path-folder {
+  background: url("[[pix:theme|dark/path_folder]]") left 3px no-repeat;
+}
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .navbar.navbar-expand .navbar-nav .nav-link {
+  color: #98b6d9 !important;
+}
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .moremenu .nav-link.active,
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .moremenu .nav-link.active:focus,
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .moremenu .nav-link.active:hover,
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .moremenu .nav-link:hover,
+.local_kopere_pay_enrollment [data-bs-theme=dark] [data-bs-theme] .moremenu .nav-link:focus {
+  background-color: rgba(248, 249, 250, 0.11);
+  border-bottom-color: #cccbcc;
+  color: #98b6d9 !important;
+}
+
+[data-bs-theme=dark] {
+  color-scheme: dark;
+}
+[data-bs-theme=dark] .kopere_pay_view .course-sidebar {
+  background: #030303;
+  box-shadow: 0 6px 34px rgba(79, 79, 79, 0.46);
+  background: linear-gradient(112.1deg, #202639 11.4%, #3f4c77 70.2%) !important;
+}
+[data-bs-theme=dark] .kopere_pay_view .course-sidebar .add-to-card-button .enrollment-btn {
+  background: linear-gradient(112.1deg, #202639 11.4%, #3f4c77 70.2%) !important;
+}
+[data-bs-theme=dark] .kopere_pay_view .course-sidebar::before {
+  background: #030303;
+}
+[data-bs-theme=dark] .kopere_pay_view .course-sidebar .social-share-wrapper {
+  background: rgba(245, 245, 250, 0.03);
+}
+[data-bs-theme=dark] .kopere_pay_view .course-sidebar .contact-with-us .enrollment-badge-2 a {
+  color: #000;
+}
+[data-bs-theme=dark] .kopere_pay_view .enrollment-course-details-area .enrollment-paginas {
+  background: #28282b;
+  box-shadow: none;
+}
+[data-bs-theme=dark] .kopere_pay_view .enrollment-course-details-area .enrollment-paginas .mainmenu li a {
+  color: #f5f5f5;
+  background: #141414;
+}
+[data-bs-theme=dark] .kopere_pay_view .enrollment-page-top .content h2, [data-bs-theme=dark] .kopere_pay_view .enrollment-page-top .content p {
+  color: #d5d5d5;
+}
+[data-bs-theme=dark] .kopere_pay_enrollment .enrollment select,
+[data-bs-theme=dark] .kopere_pay_enrollment .enrollment textarea,
+[data-bs-theme=dark] .kopere_pay_enrollment .enrollment input[type=text],
+[data-bs-theme=dark] .kopere_pay_enrollment .enrollment input[type=email],
+[data-bs-theme=dark] .kopere_pay_enrollment .enrollment input[type=password] {
+  color: #cbd0d4 !important;
+}
+
+@media (max-width: 767px) {
+  .local_kopere_pay_enrollment .enrollment .well {
+    padding: 16px;
+    border-radius: 10px;
+  }
+  .local_kopere_pay_enrollment .enrollment .well2,
+  .local_kopere_pay_enrollment .enrollment .order-area {
+    padding: 16px;
+    border-radius: 10px;
+  }
+  .local_kopere_pay_enrollment .enrollment fieldset {
+    padding: 18px 12px 14px;
+  }
+  .local_kopere_pay_enrollment .enrollment fieldset legend {
+    margin-left: 10px;
+    font-size: 18px;
+  }
+}
+
+.local_kopere_pay_enrollment .enrollment .well .well2 {
+  background-color: #ffffff;
+  border: nonew;
+}
+
+.local_kopere_pay_enrollment .enrollment fieldset input {
+  border: none;
+}
+
+.kopere-dashboard-pages .statics-pages .content .summary {
+  float: none;
+  width: 100%;
+}
+.kopere-dashboard-pages .box-page {
+  background: #fff;
+  box-shadow: 0 10px 50px 0 rgba(26, 46, 85, 0.1);
+  border-radius: 5px;
+  font-family: "Mulish", sans-serif;
+}
+.kopere-dashboard-pages .box-page .thumbnail {
+  position: relative;
+  transition: 0.3s;
+}
+.kopere-dashboard-pages .box-page .thumbnail a span {
+  display: block;
+  overflow: hidden;
+  border-radius: 5px 5px 0 0;
+  transition: 0.4s;
+  width: 100%;
+  padding-top: 45%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+}
+.kopere-dashboard-pages .box-page:hover .thumbnail a img {
+  transform: scale(1.1);
+}
+.kopere-dashboard-pages .box-page .content {
+  padding: 29px 20px 20px 20px;
+}
+.kopere-dashboard-pages .box-page .content .title a {
+  color: #192336;
+  font-size: 22px;
+  font-weight: 500;
+}
+.kopere-dashboard-pages .box-page .content p {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  line-height: 30px;
+  margin-bottom: 15px;
+  font-weight: normal;
+}
+.kopere-dashboard-pages .box-page .content .price {
+  float: right;
+}
+.kopere-dashboard-pages .box-page .content .price .current-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #6b7386;
+}
+.kopere-dashboard-pages .box-page .content .price .current-price.preco-curso-free {
+  background: #26a69a;
+  color: #fff;
+}
+.kopere-dashboard-pages .box-page .content .price .off-price {
+  text-decoration: line-through;
+  opacity: 0.4;
+  margin-left: 7px;
+}
+
+.kopere-dashboard-pages .local-kopere-pay-catalog-banner {
+  overflow: hidden;
+  width: 100%;
+  border-radius: 0 0 12px 12px;
+}
+.kopere-dashboard-pages .local-kopere-pay-catalog-banner a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.kopere-dashboard-pages .local-kopere-pay-catalog-banner-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 260px;
+  width: 100%;
+  padding: 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.kopere-dashboard-pages .local-kopere-pay-catalog-banner-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, var(--banner-color, #000000) 0%, var(--banner-color, #000000) 28%, transparent 75%);
+}
+.kopere-dashboard-pages .local-kopere-pay-catalog-banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+  color: #ffffff;
+}
+.kopere-dashboard-pages .local-kopere-pay-catalog-banner-title {
+  margin: 0 0 12px;
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+.kopere-dashboard-pages .local-kopere-pay-catalog-banner-description {
+  color: #ffffff;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+.kopere-dashboard-pages .local-kopere-pay-catalog-banner-description p:last-child {
+  margin-bottom: 0;
+}
+.kopere-dashboard-pages .local-kopere-pay-catalog-banner-preview {
+  margin-top: 10px;
+}
+.kopere-dashboard-pages .local-kopere-pay-catalog-banner-preview-title {
+  margin-bottom: 8px;
+}
+.kopere-dashboard-pages .local-kopere-pay-catalog-banner-preview-image {
+  display: block;
+  max-width: 100%;
+  max-height: 220px;
+  height: auto;
+}
+
+/*# sourceMappingURL=styles.css.map */

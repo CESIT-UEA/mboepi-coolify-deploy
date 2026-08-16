@@ -1,0 +1,70 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_kopere_dashboard/profile_get_user_info
+
+    Example context (json):
+    {
+        "user": {
+            "email": "student@example.com",
+            "phone1": "+55 11 99999-9999",
+            "city": "São Paulo",
+            "country": "Brazil",
+            "lang": "pt_br",
+            "lastaccess": "18 Jun 2026, 14:30"
+        }
+    }
+}}
+
+<div class="kopere-profile-user-info">
+    {{#user.email}}
+    <div class="info-row d-flex mb-1">
+        <div class="info-label text-muted mr-2" style="min-width:120px;">Email:</div>
+        <div class="info-value">{{user.email}}</div>
+    </div>
+    {{/user.email}}
+    {{#user.phone1}}
+    <div class="info-row d-flex mb-1">
+        <div class="info-label text-muted mr-2" style="min-width:120px;">Phone:</div>
+        <div class="info-value">{{user.phone1}}</div>
+    </div>
+    {{/user.phone1}}
+    {{#user.city}}
+    <div class="info-row d-flex mb-1">
+        <div class="info-label text-muted mr-2" style="min-width:120px;">City:</div>
+        <div class="info-value">{{user.city}}</div>
+    </div>
+    {{/user.city}}
+    {{#user.country}}
+    <div class="info-row d-flex mb-1">
+        <div class="info-label text-muted mr-2" style="min-width:120px;">Country:</div>
+        <div class="info-value">{{user.country}}</div>
+    </div>
+    {{/user.country}}
+    {{#user.lang}}
+    <div class="info-row d-flex mb-1">
+        <div class="info-label text-muted mr-2" style="min-width:120px;">Language:</div>
+        <div class="info-value">{{user.lang}}</div>
+    </div>
+    {{/user.lang}}
+    {{#user.lastaccess}}
+    <div class="info-row d-flex mb-1">
+        <div class="info-label text-muted mr-2" style="min-width:120px;">Last access:</div>
+        <div class="info-value">{{user.lastaccess}}</div>
+    </div>
+    {{/user.lastaccess}}
+</div>

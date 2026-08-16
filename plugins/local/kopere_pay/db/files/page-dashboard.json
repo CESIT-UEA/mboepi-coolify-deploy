@@ -1,0 +1,153 @@
+{
+  "title": "Dashboard",
+  "description": "",
+  "refkey": "dashboard",
+  "category": {
+    "title": "Kopere Pay",
+    "refkey": "koperepay",
+    "sortorder": 1,
+    "description": ""
+  },
+  "blocks": [
+    {
+      "refkey": "67d4447aa1205",
+      "type": "block-3",
+      "sequence": 1,
+      "elements": [
+        {
+          "refkey": "enrollments",
+          "title": "Matr\u00edculas",
+          "block_num": 1,
+          "type": "info",
+          "theme": "blue",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "SELECT COUNT(*) FROM mdl_local_kopere_pay_enrollment",
+          "cache": "none",
+          "reload": "none",
+          "info": "[]"
+        },
+        {
+          "refkey": "enrollments-pagas",
+          "title": "Matr\u00edculas pagas",
+          "block_num": 2,
+          "type": "info",
+          "theme": "pink",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "SELECT COUNT(*) FROM mdl_local_kopere_pay_enrollment WHERE status='paid'",
+          "cache": "none",
+          "reload": "none",
+          "info": "[]"
+        },
+        {
+          "refkey": "coupons",
+          "title": "Cupons ativos",
+          "block_num": 3,
+          "type": "info",
+          "theme": "orange",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "SELECT COUNT(*) FROM mdl_local_kopere_pay_coupon",
+          "cache": "none",
+          "reload": "none",
+          "info": "[]"
+        }
+      ]
+    },
+    {
+      "refkey": "67d445de33a88",
+      "type": "block-3",
+      "sequence": 2,
+      "elements": [
+        {
+          "refkey": "cursos-pagos",
+          "title": "Cursos Pagos",
+          "block_num": 1,
+          "type": "pie",
+          "theme": "light",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "  SELECT c.fullname,\r\n         count(*)\r\n    FROM mdl_local_kopere_pay_enrollment pm\r\n    JOIN mdl_course c ON pm.course = c.id\r\n   WHERE pm.status = 'paid'\r\nGROUP BY c.fullname",
+          "cache": "none",
+          "reload": "none",
+          "info": "{\n    \"chart_options\": \"{\\r\\n    colors : [\\\"#2E93fA\\\", \\\"#66DA26\\\", \\\"#546E7A\\\", \\\"#E91E63\\\", \\\"#FF9800\\\"],\\r\\n}\"\n}"
+        },
+        {
+          "refkey": "cursos-nao-pagos",
+          "title": "Cursos n\u00e3o pagos",
+          "block_num": 2,
+          "type": "pie",
+          "theme": "light",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "  SELECT c.fullname,\r\n         count(*)\r\n    FROM mdl_local_kopere_pay_enrollment pm\r\n    JOIN mdl_course c ON pm.course = c.id\r\n   WHERE pm.status != 'paid'\r\nGROUP BY c.id",
+          "cache": "none",
+          "reload": "none",
+          "info": "{\n    \"chart_options\": \"{\\r\\n    colors : [\\\"#2E93fA\\\", \\\"#66DA26\\\", \\\"#546E7A\\\", \\\"#E91E63\\\", \\\"#FF9800\\\"],\\r\\n}\"\n}"
+        },
+        {
+          "refkey": "coupons-por-curso",
+          "title": "Cupons por Curso",
+          "block_num": 3,
+          "type": "pie",
+          "theme": "light",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "SELECT c.fullname AS \"Curso\",\r\n       COUNT(m.coupon) AS \"Cupons\"\r\nFROM mdl_local_kopere_pay_enrollment m\r\nJOIN mdl_course c ON m.course = c.id\r\nGROUP BY c.id",
+          "cache": "none",
+          "reload": "none",
+          "info": "{\n    \"chart_options\": \"{\\r\\n    colors : [\\\"#2E93fA\\\", \\\"#66DA26\\\", \\\"#546E7A\\\", \\\"#E91E63\\\", \\\"#FF9800\\\"],\\r\\n}\"\n}"
+        }
+      ]
+    },
+    {
+      "refkey": "67d446d7b672a",
+      "type": "block-1",
+      "sequence": 3,
+      "elements": [
+        {
+          "refkey": "payments-por-curso",
+          "title": "Pagamentos por Curso",
+          "block_num": 1,
+          "type": "line",
+          "theme": "light",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "SELECT c.fullname AS \"Curso\",\r\n       COUNT(m.id) AS \"Total de estudantes\",\r\n       COUNT(CASE WHEN m.status = 'paid' THEN 1 END) AS \"Pagos\",\r\n       COUNT(CASE WHEN m.status != 'paid' THEN 1 END) AS \"N\u00e3o pagos\"\r\nFROM mdl_local_kopere_pay_enrollment m\r\nJOIN mdl_course c ON m.course = c.id\r\nGROUP BY c.fullname",
+          "cache": "none",
+          "reload": "none",
+          "info": "{\n    \"chart_options\": \"{\\r\\n    stroke : {\\r\\n        colors : [\\\"#2E93fA\\\", \\\"#66DA26\\\", \\\"#546E7A\\\", \\\"#E91E63\\\", \\\"#FF9800\\\"]\\r\\n    },\\r\\n    yaxis : {\\r\\n        labels : {\\r\\n            formatter: (value) => { return value },\\r\\n        },\\r\\n    },\\r\\n}\"\n}"
+        }
+      ]
+    },
+    {
+      "refkey": "67d447ae7fdf6",
+      "type": "block-1",
+      "sequence": 4,
+      "elements": [
+        {
+          "refkey": "status-de-pagamento-por-data",
+          "title": "Status de Pagamento por Data",
+          "block_num": 1,
+          "type": "line",
+          "theme": "light",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "SELECT\r\n    FROM_UNIXTIME(pm.lasttime, '%Y-%m') AS \"Data\",\r\n    COUNT(CASE WHEN pm.status = 'paid' THEN 1 END) AS \"Pago\",\r\n    COUNT(CASE WHEN pm.status = 'waiting' THEN 1 END) AS \"Aguardando pagamento\"\r\nFROM mdl_local_kopere_pay_enrollment pm\r\nGROUP BY pm.lasttime\r\nORDER BY pm.lasttime",
+          "cache": "none",
+          "reload": "none",
+          "info": "{\n    \"chart_options\": \"{\\r\\n    stroke : {\\r\\n        colors : [\\\"#2E93fA\\\", \\\"#66DA26\\\", \\\"#546E7A\\\", \\\"#E91E63\\\", \\\"#FF9800\\\"]\\r\\n    },\\r\\n    yaxis : {\\r\\n        labels : {\\r\\n            formatter: (value) => { return value },\\r\\n        },\\r\\n    },\\r\\n}\"\n}"
+        }
+      ]
+    }
+  ]
+}

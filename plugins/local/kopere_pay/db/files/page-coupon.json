@@ -1,0 +1,55 @@
+{
+  "title": "Cupons",
+  "description": "",
+  "refkey": "coupons",
+  "category": {
+    "title": "Kopere Pay",
+    "refkey": "koperepay",
+    "sortorder": 1,
+    "description": ""
+  },
+  "blocks": [
+    {
+      "refkey": "block-08",
+      "type": "block-1",
+      "sequence": 1,
+      "elements": [
+        {
+          "refkey": "coupons-utilizados",
+          "title": "Cupons Utilizados",
+          "block_num": 1,
+          "type": "table",
+          "theme": "light",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "SELECT u.id as u_id,\r\n       u.firstname,\r\n       u.lastname, \r\n       u.email, \r\n       c.id AS course_id,\r\n       c.fullname, \r\n       coupon.uniquekey AS coupon_codigo, \r\n       coupon.value AS desconto, \r\n       m.lasttime  AS data_uso\r\nFROM mdl_local_kopere_pay_enrollment m\r\nJOIN mdl_local_kopere_pay_coupon coupon ON m.coupon = coupon.uniquekey\r\nJOIN mdl_course               c ON m.course = c.id\r\nJOIN mdl_user                 u ON m.userid = u.id",
+          "cache": "6h",
+          "reload": "none",
+          "info": "{\n    \"column\": {\n        \"u_id\": {\n            \"key\": \"u_id\",\n            \"title\": \"#\",\n            \"type\": \"userphotoRenderer\",\n            \"mustache\": \"\"\n        },\n        \"firstname\": {\n            \"key\": \"firstname\",\n            \"title\": \"lang::u_fullname::local_kopere_bi\",\n            \"type\": \"userfullname\",\n            \"mustache\": \"<a href=\\\"{{{config.wwwroot}}}\\\/user\\\/view.php?id={{{u_id}}}\\\"\\r\\n   target=\\\"profile\\\">{{{u_fullname}}}<\\\/a>\"\n        },\n        \"lastname\": {\n            \"key\": \"lastname\",\n            \"title\": \"lastname\",\n            \"type\": \"none\",\n            \"mustache\": \"\"\n        },\n        \"email\": {\n            \"key\": \"email\",\n            \"title\": \"lang::email::moodle\",\n            \"type\": \"string\",\n            \"mustache\": \"<a href=\\\"mailto:{{{email}}}\\\" target=\\\"_blank\\\">{{{email}}}<\\\/a>\"\n        },\n        \"course_id\": {\n            \"key\": \"course_id\",\n            \"title\": \"Curso\",\n            \"type\": \"none\",\n            \"mustache\": \"\"\n        },\n        \"fullname\": {\n            \"key\": \"fullname\",\n            \"title\": \"lang::fullname::moodle\",\n            \"type\": \"string\",\n            \"mustache\": \"<a href=\\\"{{{config.wwwroot}}}\\\/course\\\/view.php?id={{{course_id}}}\\\" target=\\\"_blank\\\">{{{fullname}}}<\\\/a>\"\n        },\n        \"coupon_codigo\": {\n            \"key\": \"coupon_codigo\",\n            \"title\": \"C\\u00f3digo do Cupom\",\n            \"type\": \"string\",\n            \"mustache\": \"{{{coupon_codigo}}}\"\n        },\n        \"desconto\": {\n            \"key\": \"desconto\",\n            \"title\": \"Desconto\",\n            \"type\": \"string\",\n            \"mustache\": \"{{{desconto}}}\"\n        },\n        \"data_uso\": {\n            \"key\": \"data_uso\",\n            \"title\": \"lang::reports_settings_form_colunas_type_date::local_kopere_dashboard\",\n            \"type\": \"datetimeRenderer\",\n            \"mustache\": \"{{{data_uso}}}\"\n        }\n    }\n}"
+        }
+      ]
+    },
+    {
+      "refkey": "block-11",
+      "type": "block-1",
+      "sequence": 2,
+      "elements": [
+        {
+          "refkey": "coupons-nao-utilizados",
+          "title": "Cupons n\u00e3o Utilizados",
+          "block_num": 1,
+          "type": "table",
+          "theme": "light",
+          "css": "",
+          "html_before": "",
+          "html_after": "",
+          "commandsql": "SELECT\r\n    c.uniquekey,\r\n    c.amount,\r\n    c.value,\r\n    c.time\r\nFROM mdl_local_kopere_pay_coupon c\r\nLEFT JOIN mdl_local_kopere_pay_enrollment m ON c.uniquekey = m.coupon\r\nWHERE m.coupon IS NULL\r\nORDER BY c.time DESC",
+          "cache": "1h",
+          "reload": "1h",
+          "info": "{\n    \"column\": {\n        \"uniquekey\": {\n            \"key\": \"uniquekey\",\n            \"title\": \"Chave\",\n            \"type\": \"string\",\n            \"mustache\": \"{{{uniquekey}}}\"\n        },\n        \"amount\": {\n            \"key\": \"amount\",\n            \"title\": \"Quantidade\",\n            \"type\": \"number\",\n            \"mustache\": \"{{{amount}}}\"\n        },\n        \"value\": {\n            \"key\": \"value\",\n            \"title\": \"Valor\",\n            \"type\": \"number\",\n            \"mustache\": \"{{{value}}}\"\n        },\n        \"time\": {\n            \"key\": \"time\",\n            \"title\": \"lang::time::moodle\",\n            \"type\": \"datetimeRenderer\",\n            \"mustache\": \"\"\n        }\n    }\n}"
+        }
+      ]
+    }
+  ]
+}

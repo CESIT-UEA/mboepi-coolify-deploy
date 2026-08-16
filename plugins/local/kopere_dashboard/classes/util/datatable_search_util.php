@@ -1,0 +1,185 @@
+<?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * datatable_search_util file
+ *
+ * @package   local_kopere_dashboard
+ * @copyright 2017 Eduardo Kraus {@link https://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+namespace local_kopere_dashboard\util;
+
+use Exception;
+
+/**
+ * Class datatable_search_util
+ *
+ * @package local_kopere_dashboard\util
+ */
+class datatable_search_util {
+    /** @var string */
+    private $columnselect;
+    /** @var mixed */
+    private $start;
+    /** @var mixed */
+    private $length;
+    /** @var string */
+    private $order;
+    /** @var string */
+    private $orderdir;
+    /** @var string */
+    private $where;
+    /** @var array */
+    private $params = [];
+
+    /**
+     * Datatable_search_util constructor.
+     *
+     * @param $columnselect
+     * @throws Exception
+     */
+    public function __construct($columnselect) {
+        $this->columnselect = $columnselect;
+        $this->start = optional_param("start", 0, PARAM_INT);
+        $this->length = optional_param("length", 0, PARAM_INT);
+
+        $this->process_where();
+        $this->proccess_order();
+    }
+
+    /**
+     * Function process_where
+     * @throws Exception
+     */
+    public function process_where() {
+        global $DB;
+
+        $count = 0;
+        $search = optional_param_array("search", [], PARAM_TEXT);
+
+        if (isset($search["value"][0]) && $search) {
+            $like = [];
+            foreach ($this->columnselect as $column) {
+                $searchvalue = $search["value"];
+                $searchvalue = str_replace("'", "\'", $searchvalue);
+                $searchvalue = str_replace(["\n", "\r"], "", $searchvalue);
+                $searchvalue = str_replace("--", "", $searchvalue);
+                if ($DB->get_dbfamily() == "postgres") {
+                    $count++;
+                    if (is_array($column)) {
+                        $like[] = " cast( {$column[0]} as text ) LIKE :searchparam{$count}";
+                    } else {
+                        $like[] = "cast( {$column} as text ) LIKE :searchparam{$count}";
+                    }
+                    $this->params["searchparam{$count}"] = "%{$searchvalue}%";
+                } else {
+                    $count++;
+                    if (is_array($column)) {
+                        $like[] = "{$column[0]} LIKE :searchparam{$count}";
+                    } else {
+                        $like[] = "{$column} LIKE :searchparam{$count}";
+                    }
+                    $this->params["searchparam{$count}"] = "%{$searchvalue}%";
+                }
+            }
+            $this->where = "AND (" . implode(" OR ", $like) . ")";
+        }
+    }
+
+    /**
+     * Function proccess_order
+     */
+    private function proccess_order() {
+
+        $order = string_util::clear_all_params("order", [], PARAM_TEXT);
+
+        if ($order) {
+            $column = intval($order[0]["column"]);
+            if (is_array($this->columnselect[$column])) {
+                $this->order = $this->columnselect[$column][0];
+            } else {
+                $this->order = $this->columnselect[$column];
+            }
+
+            // Check if it is ASC to avoid adding the value from the user.
+            $this->orderdir = $order[0]["dir"] == "asc" ? "ASC" : "DESC";
+        }
+    }
+
+    /**
+     * Function execute_sql_and_return
+     *
+     * @param $sql
+     * @param string $group
+     * @param null $params
+     * @param null $functionbeforereturn
+     * @param null $countparams
+     * @throws \dml_exception
+     * @throws \Exception
+     */
+    public function execute_sql_and_return($sql, $group = "", $params = null, $functionbeforereturn = null, $countparams = null) {
+        global $DB;
+
+        if ($params == null) {
+            $params = $this->params;
+        } else {
+            $params = array_merge($params, $this->params);
+        }
+
+        $order = "";
+        if ($this->order) {
+            $order = "ORDER BY {$this->order} {$this->orderdir}";
+        }
+
+        if ($group || $countparams) {
+            if (!$countparams && $group) {
+                $countparams = str_replace("GROUP BY", "", $group);
+            }
+            $sqlcolumns = str_replace("{[columns]}", "count(DISTINCT {$countparams}) AS num, {[columns]}", $sql);
+            $sql = str_replace("{[columns]}", "count(DISTINCT {$countparams}) AS num", $sql);
+        } else {
+            $sqlcolumns = str_replace("{[columns]}", "count(*) AS num, {[columns]}", $sql);
+            $sql = str_replace("{[columns]}", "count(*) AS num", $sql);
+        }
+
+        if ($DB->get_dbfamily() == "postgres") {
+            $sqlsearch      = "{$sqlcolumns} \n{$this->where} \n{$group} \n{$order} \nLIMIT {$this->length} OFFSET {$this->start}";
+        } else {
+            $sqlsearch      = "{$sqlcolumns} \n{$this->where} \n{$group} \n{$order} \nLIMIT {$this->start}, {$this->length}";
+        }
+        $sqlsearchcount = "{$sql}        \n{$this->where} \n{$group} \n{$order}";
+        $sqltotal       = "{$sql}                         \n{$group} \n{$order}";
+
+        $sqlsearch = str_replace("{[columns]}", implode(", ", $this->columnselect), $sqlsearch);
+
+        $result = $DB->get_records_sql($sqlsearch, $params);
+        $total = $DB->get_record_sql($sqltotal, $params);
+        $searchnum = $total->num;
+
+        if ($this->where) {
+            $search = $DB->get_record_sql($sqlsearchcount, $params);
+            $searchnum = $search->num;
+        }
+
+        if ($functionbeforereturn) {
+            $result = call_user_func($functionbeforereturn, $result);
+        }
+
+        json::encode($result, $total->num, $searchnum, $sqlsearch);
+    }
+}
