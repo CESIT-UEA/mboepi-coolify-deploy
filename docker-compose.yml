@@ -28,7 +28,7 @@ services:
       MOODLE_DOMAIN: mboepi.tecnocomp.cloud
       MOODLE_URL: https://mboepi.tecnocomp.cloud
       MOODLE_SSLPROXY: "true"
-      MOODLE_REVERSEPROXY: "true"
+      MOODLE_REVERSEPROXY: "false"
 
       MOODLE_DBTYPE: pgsql
       MOODLE_DBHOST: postgres
