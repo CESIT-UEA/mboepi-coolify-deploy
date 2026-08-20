@@ -25,8 +25,8 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      MOODLE_DOMAIN: mboepi.tecnocomp.cloud
-      MOODLE_URL: https://mboepi.tecnocomp.cloud
+      MOODLE_DOMAIN: mboepi.uea.edu.br
+      MOODLE_URL: https://mboepi.uea.edu.br
       MOODLE_SSLPROXY: "true"
       MOODLE_REVERSEPROXY: "false"
 
@@ -57,7 +57,7 @@ services:
       - "80"
     # labels:
     #   - traefik.enable=true
-    #   - traefik.http.routers.moodle.rule=Host(`mboepi.tecnocomp.cloud`)
+    #   - traefik.http.routers.moodle.rule=Host(`mboepi.uea.edu.br`)
     #   - traefik.http.routers.moodle.entrypoints=websecure
     #   - traefik.http.routers.moodle.tls=true
     #   - traefik.http.services.moodle.loadbalancer.server.port=80

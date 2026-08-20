@@ -96,6 +96,14 @@ RUN cd ${MOODLE_DIR} \
     && composer install --no-dev --classmap-authoritative --no-interaction --no-progress --prefer-dist
 
 # =========================================================
+# PERSONALIZAÇÕES DO MOODLE
+# =========================================================
+
+COPY --chown=www-data:www-data --chmod=0644 \
+    imagem/monologo-lti-moodle4.svg \
+    ${MOODLE_DIR}/public/pix/monologo-lti-moodle4.svg
+
+# =========================================================
 # CONFIGURAÇÕES DO CONTÊINER
 # =========================================================
 
