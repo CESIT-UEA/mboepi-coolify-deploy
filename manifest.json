@@ -1,0 +1,16 @@
+{
+  "name": "Mboepi",
+  "short_name": "Mboepi",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/pwa/monologo-lti-moodle4.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

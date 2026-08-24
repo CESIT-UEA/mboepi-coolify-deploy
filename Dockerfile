@@ -96,6 +96,17 @@ RUN cd ${MOODLE_DIR} \
     && composer install --no-dev --classmap-authoritative --no-interaction --no-progress --prefer-dist
 
 # =========================================================
+# CONFIGURAÇÃO da PWA
+# =========================================================
+
+# Cria o diretório dos arquivos da PWA
+RUN mkdir -p ${MOODLE_DIR}/public/pwa
+
+# Adiciona o manifest e o ícone da PWA
+COPY manifest.json ${MOODLE_DIR}/public/manifest.json
+COPY imagem/monologo-lti-moodle4.svg ${MOODLE_DIR}/public/pwa/monologo-lti-moodle4.svg
+
+# =========================================================
 # PERSONALIZAÇÕES DO MOODLE
 # =========================================================
 
@@ -116,7 +127,7 @@ COPY moodle-cron.sh /usr/local/bin/moodle-cron.sh
 RUN set -eux; \
     chmod +x \
         /usr/local/bin/docker-entrypoint.sh \
-        /usr/local/bin/moodle-cron.sh; \
+        /usr/local/bin/moodle-cron.sh; \    
     mkdir -p \
         /run/nginx \
         "${MOODLE_DATAROOT}"; \
